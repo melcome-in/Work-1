@@ -21,6 +21,7 @@ import AudioPlayer from './components/AudioPlayer.jsx';
 import ScratchRevealDate from './components/ScratchRevealDate.jsx';
 import CountdownTimer from './components/CountdownTimer.jsx';
 import Itinerary from './components/Itinerary.jsx';
+import weddingSong from './assets/audio/wedding-song.mp3';
 
 const App = () => {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
@@ -89,8 +90,8 @@ const App = () => {
       {/* Component A: Fullscreen Ambient Golden Dust & Bokeh Canvas */}
       <AmbientDust />
 
-      {/* Component C: Web Audio Oriental Sound Synthesizer (Maqam Hijaz) */}
-      <AudioPlayer ref={audioPlayerRef} />
+      {/* Component C: Audio Player with uploaded wedding song */}
+      <AudioPlayer ref={audioPlayerRef} externalAudioSrc={weddingSong} />
 
       {/* Component B: 3D Royal Wax Seal Envelope Modal */}
       {!isEnvelopeOpen && (

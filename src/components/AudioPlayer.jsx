@@ -201,8 +201,6 @@ const AudioPlayer = forwardRef(({ externalAudioSrc = '' }, ref) => {
   }, [ensureAudioContext, playOudNote]);
 
   const startMusic = useCallback(() => {
-    if (isPlayingRef.current) return;
-
     // If external audio file is provided in fallback <audio>, use that
     if (externalAudioSrc && fallbackAudioRef.current) {
       fallbackAudioRef.current
@@ -211,9 +209,13 @@ const AudioPlayer = forwardRef(({ externalAudioSrc = '' }, ref) => {
           isPlayingRef.current = true;
           setIsPlaying(true);
         })
-        .catch(() => {});
+        .catch((err) => {
+          console.warn('Audio playback was prevented:', err);
+        });
       return;
     }
+
+    if (isPlayingRef.current) return;
 
     const ctx = ensureAudioContext();
     if (masterGainRef.current) {
@@ -237,14 +239,14 @@ const AudioPlayer = forwardRef(({ externalAudioSrc = '' }, ref) => {
     isPlayingRef.current = false;
     setIsPlaying(false);
 
-    if (loopIntervalRef.current) {
-      clearInterval(loopIntervalRef.current);
-      loopIntervalRef.current = null;
-    }
-
     if (externalAudioSrc && fallbackAudioRef.current) {
       fallbackAudioRef.current.pause();
       return;
+    }
+
+    if (loopIntervalRef.current) {
+      clearInterval(loopIntervalRef.current);
+      loopIntervalRef.current = null;
     }
 
     if (audioCtxRef.current && masterGainRef.current) {
@@ -262,12 +264,29 @@ const AudioPlayer = forwardRef(({ externalAudioSrc = '' }, ref) => {
   }, [externalAudioSrc]);
 
   const toggleMusic = useCallback(() => {
+    if (externalAudioSrc && fallbackAudioRef.current) {
+      if (fallbackAudioRef.current.paused) {
+        fallbackAudioRef.current
+          .play()
+          .then(() => {
+            isPlayingRef.current = true;
+            setIsPlaying(true);
+          })
+          .catch((err) => console.warn(err));
+      } else {
+        fallbackAudioRef.current.pause();
+        isPlayingRef.current = false;
+        setIsPlaying(false);
+      }
+      return;
+    }
+
     if (isPlayingRef.current) {
       stopMusic();
     } else {
       startMusic();
     }
-  }, [startMusic, stopMusic]);
+  }, [externalAudioSrc, startMusic, stopMusic]);
 
   useImperativeHandle(ref, () => ({
     startMusic,
@@ -305,12 +324,20 @@ const AudioPlayer = forwardRef(({ externalAudioSrc = '' }, ref) => {
 
   return (
     <>
-      {/* Fallback <audio> ref for easy client MP3 swapping */}
+      {/* Fallback <audio> ref for wedding song */}
       <audio
         ref={fallbackAudioRef}
         src={externalAudioSrc || undefined}
         loop
-        preload="none"
+        preload="auto"
+        onPlay={() => {
+          isPlayingRef.current = true;
+          setIsPlaying(true);
+        }}
+        onPause={() => {
+          isPlayingRef.current = false;
+          setIsPlaying(false);
+        }}
         className="hidden"
       />
 
@@ -319,7 +346,7 @@ const AudioPlayer = forwardRef(({ externalAudioSrc = '' }, ref) => {
         <button
           type="button"
           onClick={toggleMusic}
-          aria-label={isPlaying ? 'Mute ambient Maqam music' : 'Play ambient Maqam music'}
+          aria-label={isPlaying ? 'Mute wedding music' : 'Play wedding music'}
           className="group flex items-center gap-3 px-4 py-2.5 rounded-full bg-obsidian/85 backdrop-blur-md border border-gold-primary/40 hover:border-gold-primary shadow-gold-glow transition-all duration-300"
         >
           {/* Golden Frequency Visualizer */}
@@ -338,7 +365,7 @@ const AudioPlayer = forwardRef(({ externalAudioSrc = '' }, ref) => {
           </div>
 
           <span className="font-montserrat text-[10px] tracking-[0.22em] uppercase text-parchment/90 hidden sm:inline">
-            {isPlaying ? 'Maqam Hijaz' : 'Sound Off'}
+            {isPlaying ? (externalAudioSrc ? 'Music Playing' : 'Maqam Hijaz') : 'Sound Off'}
           </span>
 
           <span className="text-gold-primary group-hover:text-gold-accent transition-colors">
