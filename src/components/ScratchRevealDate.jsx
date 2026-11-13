@@ -254,13 +254,13 @@ const ScratchRevealDate = () => {
   };
 
   return (
-    <section className="relative py-16 sm:py-20 px-4 max-w-2xl mx-auto text-center">
+    <section className="relative py-12 sm:py-20 px-3 sm:px-4 max-w-2xl mx-auto text-center">
       {/* Section Header */}
-      <div className="mb-8">
-        <p className="font-montserrat text-[11px] uppercase tracking-[0.35em] text-gold-accent mb-2">
+      <div className="mb-6 sm:mb-8">
+        <p className="font-montserrat text-[10px] sm:text-[11px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-gold-accent mb-1.5 sm:mb-2">
           The Wedding Celebration
         </p>
-        <h3 className="font-cinzel text-2xl sm:text-3xl text-gold-foil">
+        <h3 className="font-cinzel text-xl sm:text-3xl text-gold-foil">
           Scratch to Reveal Date &amp; Venue
         </h3>
       </div>
@@ -268,45 +268,45 @@ const ScratchRevealDate = () => {
       {/* Scratch Card Frame */}
       <div
         ref={containerRef}
-        className="relative w-full min-h-[280px] sm:min-h-[300px] rounded-2xl p-6 sm:p-10 bg-gradient-to-b from-emerald-royal via-[#05140F] to-obsidian border-2 border-gold-primary/70 shadow-gold-glow overflow-hidden flex items-center justify-center select-none"
+        className="relative w-full min-h-[275px] sm:min-h-[300px] rounded-2xl p-3.5 sm:p-10 bg-gradient-to-b from-emerald-royal via-[#05140F] to-obsidian border-2 border-gold-primary/70 shadow-gold-glow overflow-hidden flex items-center justify-center select-none"
       >
         {/* Corner Filigree Ornaments */}
-        <span className="absolute top-3 left-4 text-gold-primary/70 text-sm pointer-events-none">
+        <span className="absolute top-2.5 left-3 sm:top-3 sm:left-4 text-gold-primary/70 text-xs sm:text-sm pointer-events-none">
           ❖
         </span>
-        <span className="absolute top-3 right-4 text-gold-primary/70 text-sm pointer-events-none">
+        <span className="absolute top-2.5 right-3 sm:top-3 sm:right-4 text-gold-primary/70 text-xs sm:text-sm pointer-events-none">
           ❖
         </span>
-        <span className="absolute bottom-3 left-4 text-gold-primary/70 text-sm pointer-events-none">
+        <span className="absolute bottom-2.5 left-3 sm:bottom-3 sm:left-4 text-gold-primary/70 text-xs sm:text-sm pointer-events-none">
           ❖
         </span>
-        <span className="absolute bottom-3 right-4 text-gold-primary/70 text-sm pointer-events-none">
+        <span className="absolute bottom-2.5 right-3 sm:bottom-3 sm:right-4 text-gold-primary/70 text-xs sm:text-sm pointer-events-none">
           ❖
         </span>
 
         {/* Underneath Illuminated Revealed Date Content */}
         <div
           ref={dateContentRef}
-          className="relative z-10 flex flex-col items-center justify-center text-center px-2 py-3 w-full"
+          className="relative z-10 flex flex-col items-center justify-center text-center px-1 py-2 w-full"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-primary/15 border border-gold-primary/40 text-gold-accent font-montserrat text-[10px] uppercase tracking-[0.28em] mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-gold-primary/15 border border-gold-primary/40 text-gold-accent font-montserrat text-[9px] sm:text-[10px] uppercase tracking-[0.25em] mb-2 sm:mb-3">
             <Sparkles className="w-3 h-3" />
             <span>1448 Rajab 03</span>
             <Sparkles className="w-3 h-3" />
           </div>
 
-          <h4 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-gold-foil tracking-wide drop-shadow-[0_0_25px_rgba(212,175,55,0.45)] mb-2">
+          <h4 className="font-cinzel text-xl sm:text-3xl md:text-4xl font-bold text-gold-foil tracking-wide drop-shadow-[0_0_25px_rgba(212,175,55,0.45)] mb-1 sm:mb-2">
             Sunday, 13 December 2026
           </h4>
 
-          <div className="my-2 p-3 sm:p-4 rounded-xl bg-obsidian/75 border border-gold-primary/40 max-w-md mx-auto w-full">
-            <p className="font-cinzel text-base sm:text-lg font-bold text-gold-accent">
+          <div className="my-1.5 sm:my-2 p-2.5 sm:p-4 rounded-xl bg-obsidian/80 border border-gold-primary/40 max-w-sm sm:max-w-md mx-auto w-full">
+            <p className="font-cinzel text-sm sm:text-lg font-bold text-gold-accent leading-snug">
               HITECH REGENCY, Kozhikkara
             </p>
-            <p className="font-montserrat text-xs sm:text-sm text-parchment/95 mt-1 font-semibold">
+            <p className="font-montserrat text-[11px] sm:text-sm text-parchment/95 mt-0.5 sm:mt-1 font-semibold">
               Time: 12:00am to 2:30pm
             </p>
-            <p className="font-montserrat text-[10px] text-parchment/65 italic mt-0.5">
+            <p className="font-montserrat text-[9px] sm:text-[10px] text-parchment/65 italic mt-0.5">
               (Note: Printed as 12:00am in the card)
             </p>
           </div>
@@ -315,11 +315,11 @@ const ScratchRevealDate = () => {
             href="https://maps.google.com/?q=Hitech+Regency+Convention+Centre+Kozhikkara"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-full bg-gold-primary/20 hover:bg-gold-primary/35 border border-gold-primary/50 text-gold-accent hover:text-gold-foil font-montserrat text-[10px] uppercase tracking-[0.2em] transition-all"
+            className="inline-flex items-center gap-1.5 mt-1 sm:mt-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-gold-primary/20 hover:bg-gold-primary/35 border border-gold-primary/50 text-gold-accent hover:text-gold-foil font-montserrat text-[9px] sm:text-[10px] uppercase tracking-[0.18em] transition-all"
           >
-            <MapPin className="w-3.5 h-3.5" />
+            <MapPin className="w-3 h-3" />
             <span>Open in Google Maps</span>
-            <ExternalLink className="w-3 h-3 opacity-70" />
+            <ExternalLink className="w-2.5 h-2.5 opacity-70" />
           </a>
         </div>
 
@@ -330,34 +330,35 @@ const ScratchRevealDate = () => {
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
+          style={{ touchAction: 'none' }}
           aria-label="Interactive gold foil scratch card covering the wedding date and venue"
-          className={`absolute inset-0 z-20 w-full h-full touch-none ${
+          className={`absolute inset-0 z-20 w-full h-full touch-none select-none ${
             isRevealed ? 'pointer-events-none' : 'cursor-crosshair'
           }`}
         />
       </div>
 
       {/* Secondary Subtle Button: "Instant Reveal" + Status */}
-      <div className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+      <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-6">
         {!isRevealed ? (
           <>
-            <span className="font-montserrat text-[11px] tracking-[0.2em] uppercase text-parchment/60">
+            <span className="font-montserrat text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-parchment/60">
               {scratchPercent > 0
                 ? `${scratchPercent}% Foil Cleared`
-                : 'Drag across gold leaf to scratch'}
+                : 'Touch & scratch gold leaf to reveal'}
             </span>
             <button
               type="button"
               onClick={triggerFullReveal}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-primary/40 hover:border-gold-primary bg-emerald-royal/60 hover:bg-gold-primary/15 text-gold-accent font-montserrat text-[11px] uppercase tracking-[0.22em] transition-all duration-300"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full border border-gold-primary/40 hover:border-gold-primary bg-emerald-royal/60 hover:bg-gold-primary/15 text-gold-accent font-montserrat text-[10px] sm:text-[11px] uppercase tracking-[0.2em] transition-all duration-300"
             >
-              <Eye className="w-3.5 h-3.5" />
+              <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span>Instant Reveal</span>
             </button>
           </>
         ) : (
-          <span className="font-montserrat text-[11px] tracking-[0.28em] uppercase text-gold-accent flex items-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-gold-primary" />
+          <span className="font-montserrat text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-gold-accent flex items-center gap-2">
+            <Sparkles className="w-3 h-3 text-gold-primary" />
             <span>The Sacred Date Has Been Illuminated</span>
           </span>
         )}

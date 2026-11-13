@@ -75,8 +75,6 @@ const AmbientDust = () => {
           ctx.fill();
         } else {
           ctx.fillStyle = `rgba(${p.hue}, ${currentAlpha})`;
-          ctx.shadowColor = 'rgba(212, 175, 55, 0.6)';
-          ctx.shadowBlur = 6;
           ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
           ctx.fill();
         }

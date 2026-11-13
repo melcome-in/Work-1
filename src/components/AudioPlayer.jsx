@@ -342,20 +342,20 @@ const AudioPlayer = forwardRef(({ externalAudioSrc = '' }, ref) => {
       />
 
       {/* Fixed Top-Right Audio Pill */}
-      <div className="fixed top-5 right-5 z-50">
+      <div className="fixed top-3 right-3 sm:top-5 sm:right-5 z-50">
         <button
           type="button"
           onClick={toggleMusic}
           aria-label={isPlaying ? 'Mute wedding music' : 'Play wedding music'}
-          className="group flex items-center gap-3 px-4 py-2.5 rounded-full bg-obsidian/85 backdrop-blur-md border border-gold-primary/40 hover:border-gold-primary shadow-gold-glow transition-all duration-300"
+          className="group flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full bg-obsidian/90 backdrop-blur-md border border-gold-primary/40 hover:border-gold-primary shadow-gold-glow transition-all duration-300"
         >
           {/* Golden Frequency Visualizer */}
-          <div className="flex items-end gap-[3px] h-4 w-5" aria-hidden="true">
+          <div className="flex items-end gap-[2px] sm:gap-[3px] h-3.5 sm:h-4 w-4 sm:w-5" aria-hidden="true">
             {bars.map((height, idx) => (
               <span
                 key={idx}
                 style={{ height: `${height}%` }}
-                className={`w-[2.5px] rounded-full transition-all duration-200 ${
+                className={`w-[2px] sm:w-[2.5px] rounded-full transition-all duration-200 ${
                   isPlaying
                     ? 'bg-gradient-to-t from-gold-primary to-gold-accent'
                     : 'bg-gold-primary/40'
@@ -364,7 +364,7 @@ const AudioPlayer = forwardRef(({ externalAudioSrc = '' }, ref) => {
             ))}
           </div>
 
-          <span className="font-montserrat text-[10px] tracking-[0.22em] uppercase text-parchment/90 hidden sm:inline">
+          <span className="font-montserrat text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.22em] uppercase text-parchment/90 hidden xs:inline">
             {isPlaying ? (externalAudioSrc ? 'Music Playing' : 'Maqam Hijaz') : 'Sound Off'}
           </span>
 

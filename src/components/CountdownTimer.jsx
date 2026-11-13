@@ -47,9 +47,9 @@ const ArchCard = ({ value, label, arabicLabel }) => {
   }, [value]);
 
   return (
-    <div className="relative group flex flex-col items-center">
+    <div className="relative group flex flex-col items-center w-full">
       {/* Traditional Moorish Palace Archway Card */}
-      <div className="relative w-full max-w-[165px] h-[175px] sm:h-[225px] moorish-arch bg-gradient-to-b from-[#09241B] via-emerald-royal to-obsidian border-2 border-gold-primary/70 shadow-gold-glow flex flex-col items-center justify-center px-3 sm:px-4 pt-5 sm:pt-6 pb-3 sm:pb-4 overflow-hidden transition-transform duration-500 group-hover:-translate-y-1">
+      <div className="relative w-full max-w-[150px] sm:max-w-[170px] h-[150px] sm:h-[220px] moorish-arch bg-gradient-to-b from-[#09241B] via-emerald-royal to-obsidian border border-gold-primary/60 sm:border-2 shadow-gold-glow flex flex-col items-center justify-center px-2 sm:px-4 pt-4 sm:pt-6 pb-2 sm:pb-4 overflow-hidden transition-transform duration-500 group-hover:-translate-y-1">
         {/* Intricate Inner Moorish Arch SVG Filigree */}
         <svg
           viewBox="0 0 160 220"
@@ -78,32 +78,32 @@ const ArchCard = ({ value, label, arabicLabel }) => {
         {/* Subtle Top Lantern Glow */}
         <div
           aria-hidden="true"
-          className="absolute top-2 w-20 h-20 rounded-full bg-gold-primary/15 blur-xl pointer-events-none"
+          className="absolute top-2 w-16 sm:w-20 h-16 sm:h-20 rounded-full bg-gold-primary/15 blur-xl pointer-events-none"
         />
 
         {/* Arabic Calligraphy Label */}
-        <span className="font-amiri text-sm sm:text-base text-gold-accent/80 mb-1">
+        <span className="font-amiri text-xs sm:text-base text-gold-accent/80 mb-0.5 sm:mb-1">
           {arabicLabel}
         </span>
 
         {/* 3D Flip/Roll Number Container */}
         <div
           style={{ perspective: '400px' }}
-          className="my-1 h-14 sm:h-16 flex items-center justify-center overflow-hidden"
+          className="my-0.5 sm:my-1 h-10 sm:h-16 flex items-center justify-center overflow-hidden"
         >
           <span
             ref={numberRef}
-            className="inline-block font-cinzel text-3xl sm:text-5xl font-bold text-gold-foil tracking-wider drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]"
+            className="inline-block font-cinzel text-2xl sm:text-5xl font-bold text-gold-foil tracking-wider drop-shadow-[0_4px_12px_rgba(0,0,0,0.7)]"
           >
             {value}
           </span>
         </div>
 
         {/* Ornamental Divider */}
-        <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-gold-primary/70 to-transparent my-2" />
+        <div className="w-8 sm:w-12 h-[1px] bg-gradient-to-r from-transparent via-gold-primary/70 to-transparent my-1 sm:my-2" />
 
         {/* English Metadata Label */}
-        <span className="font-montserrat text-[10px] sm:text-[11px] uppercase tracking-[0.28em] text-parchment/80">
+        <span className="font-montserrat text-[9px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.28em] text-parchment/80">
           {label}
         </span>
       </div>
@@ -122,22 +122,22 @@ const CountdownTimer = () => {
   }, []);
 
   return (
-    <section className="relative py-16 sm:py-20 px-4 max-w-4xl mx-auto text-center">
+    <section className="relative py-12 sm:py-20 px-3 sm:px-4 max-w-4xl mx-auto text-center">
       {/* Header */}
-      <div className="mb-12">
-        <p className="font-montserrat text-[11px] uppercase tracking-[0.35em] text-gold-accent mb-2">
+      <div className="mb-8 sm:mb-12">
+        <p className="font-montserrat text-[10px] sm:text-[11px] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-gold-accent mb-1.5 sm:mb-2">
           The Auspicious Countdown
         </p>
-        <h3 className="font-cinzel text-2xl sm:text-4xl text-gold-foil mb-3">
+        <h3 className="font-cinzel text-xl sm:text-4xl text-gold-foil mb-2 sm:mb-3">
           Shaheer &amp; Nidha &bull; 13 December 2026
         </h3>
-        <p className="font-cormorant italic text-lg text-parchment/75">
+        <p className="font-cormorant italic text-sm sm:text-lg text-parchment/75">
           Counting down every moment until the celebration of our holy union
         </p>
       </div>
 
       {/* 4 Moorish Palace Archway Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 max-w-3xl mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-6 max-w-3xl mx-auto px-1">
         <ArchCard
           value={timeLeft.days}
           label="Days"

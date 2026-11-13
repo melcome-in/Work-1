@@ -129,7 +129,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-40 flex flex-col items-center justify-center min-h-dvh px-4 py-6 sm:py-8 bg-obsidian/95 backdrop-blur-md select-none overflow-y-auto overflow-x-hidden"
+      className="fixed inset-0 z-40 flex flex-col items-center justify-center min-h-[100dvh] px-3 sm:px-4 py-4 sm:py-8 bg-obsidian/95 backdrop-blur-md select-none overflow-y-auto overflow-x-hidden"
     >
       {/* Ambient Radial Spotlight behind the Envelope */}
       <div
@@ -138,8 +138,8 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
       />
 
       {/* Top Ceremonial Bismillah */}
-      <div className="relative z-10 text-center mb-6 sm:mb-12">
-        <p className="font-amiri text-2xl sm:text-3xl text-gold-primary tracking-wide">
+      <div className="relative z-10 text-center mb-4 sm:mb-10">
+        <p className="font-amiri text-xl sm:text-3xl text-gold-primary tracking-wide">
           بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
         </p>
       </div>
@@ -148,7 +148,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
       <div
         ref={envelopeStageRef}
         style={{ perspective: '1200px' }}
-        className="relative z-20 w-full max-w-[360px] sm:max-w-[460px] aspect-[460/320] flex items-center justify-center"
+        className="relative z-20 w-full max-w-[325px] sm:max-w-[460px] aspect-[460/320] flex items-center justify-center"
       >
         <div className="relative w-full h-full preserve-3d">
           {/* Layer 1: Back Cavity of the Envelope */}
@@ -357,7 +357,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
       </div>
 
       {/* Interactive Call-to-Action Below Envelope */}
-      <div ref={promptTextRef} className="relative z-20 mt-8 sm:mt-12 px-2 text-center">
+      <div ref={promptTextRef} className="relative z-20 mt-5 sm:mt-12 px-2 text-center">
         <button
           type="button"
           onClick={handleOpenEnvelope}
