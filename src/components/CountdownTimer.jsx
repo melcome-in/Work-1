@@ -129,7 +129,7 @@ const CountdownTimer = () => {
           The Auspicious Countdown
         </p>
         <h3 className="font-cinzel text-xl sm:text-4xl text-gold-foil mb-2 sm:mb-3">
-          Shaheer &amp; Nidha &bull; 13 December 2026
+          Shaheer &amp; Nidha
         </h3>
         <p className="font-cormorant italic text-sm sm:text-lg text-parchment/75">
           Counting down every moment until the celebration of our holy union
