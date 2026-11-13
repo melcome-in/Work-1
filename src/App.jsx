@@ -100,17 +100,17 @@ const App = () => {
             </p>
 
             {/* Groom's Parents / Inviting Family */}
-            <div className="hero-reveal max-w-lg mx-auto mb-5 sm:mb-8 px-2.5 sm:px-6 py-3.5 sm:py-5 rounded-xl sm:rounded-2xl bg-obsidian/60 border border-gold-primary/30 shadow-inner text-center overflow-hidden">
+            <div className="hero-reveal max-w-lg mx-auto mb-5 sm:mb-8 px-2 sm:px-6 py-3 sm:py-5 rounded-xl sm:rounded-2xl bg-obsidian/60 border border-gold-primary/30 shadow-inner text-center">
               <p 
-                className="font-cinzel font-bold text-gold-foil uppercase text-center"
+                className="font-cinzel font-bold text-gold-foil uppercase text-center block w-full"
                 style={{
-                  fontSize: 'clamp(0.75rem, 3.2vw, 1.05rem)',
+                  fontSize: 'clamp(0.58rem, 2.75vw, 1.15rem)',
                   whiteSpace: 'nowrap',
-                  letterSpacing: '0.035em',
+                  letterSpacing: '0.015em',
                   fontVariantLigatures: 'none',
                 }}
               >
-                Mr. Mohammed <span style={{ wordSpacing: '0.15em', margin: '0 0.15em' }}>&amp;</span> Mrs. Shamla Mohammed
+                Mr. Mohammed <span style={{ wordSpacing: '0.12em', margin: '0 0.1em' }}>&amp;</span> Mrs. Shamla Mohammed
               </p>
               <p className="font-montserrat text-[11px] sm:text-sm text-parchment/80 mt-1">
                 Pathil House, Kollannoor, Eravakkad P.O.
