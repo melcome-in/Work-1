@@ -101,3 +101,12 @@
   border-radius: 3px;
 }
 
+/* Prevent display font ligature & swash collisions */
+.font-cinzel,
+.font-cinzel-decorative,
+.gold-heading,
+h1, h2, h3, h4 {
+  font-variant-ligatures: none !important;
+  font-feature-settings: "liga" 0, "clig" 0, "dlig" 0 !important;
+}
+

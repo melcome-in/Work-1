@@ -81,7 +81,7 @@ const App = () => {
         {/* Hero Section: Royal Proclamation & Couple Monogram */}
         <header
           ref={heroSectionRef}
-          className="relative pt-6 sm:pt-20 pb-8 sm:pb-16 px-2.5 sm:px-4 max-w-4xl mx-auto text-center"
+          className="relative pt-10 sm:pt-20 pb-8 sm:pb-16 px-2.5 sm:px-4 max-w-4xl mx-auto text-center"
         >
           {/* Moorish Grand Archway Frame */}
           <div className="relative rounded-t-[80px] xs:rounded-t-[110px] sm:rounded-t-[220px] rounded-b-2xl sm:rounded-b-3xl bg-gradient-to-b from-emerald-royal/95 via-[#071C15]/95 to-obsidian/95 border border-gold-primary/60 sm:border-2 shadow-gold-glow px-3.5 sm:px-14 pt-8 sm:pt-20 pb-7 sm:pb-14 overflow-hidden">
@@ -100,16 +100,24 @@ const App = () => {
             </p>
 
             {/* Groom's Parents / Inviting Family */}
-            <div className="hero-reveal max-w-lg mx-auto mb-5 sm:mb-8 px-3.5 sm:px-6 py-3.5 sm:py-5 rounded-xl sm:rounded-2xl bg-obsidian/60 border border-gold-primary/30 shadow-inner text-center">
-              <p className="font-cinzel text-base sm:text-xl font-bold text-gold-foil tracking-wide">
-                Mr. Mohammed &amp; Mrs. Shamla Mohammed
+            <div className="hero-reveal max-w-lg mx-auto mb-5 sm:mb-8 px-2.5 sm:px-6 py-3.5 sm:py-5 rounded-xl sm:rounded-2xl bg-obsidian/60 border border-gold-primary/30 shadow-inner text-center overflow-hidden">
+              <p 
+                className="font-cinzel font-bold text-gold-foil uppercase text-center"
+                style={{
+                  fontSize: 'clamp(0.75rem, 3.2vw, 1.05rem)',
+                  whiteSpace: 'nowrap',
+                  letterSpacing: '0.035em',
+                  fontVariantLigatures: 'none',
+                }}
+              >
+                Mr. Mohammed <span style={{ wordSpacing: '0.15em', margin: '0 0.15em' }}>&amp;</span> Mrs. Shamla Mohammed
               </p>
               <p className="font-montserrat text-[11px] sm:text-sm text-parchment/80 mt-1">
                 Pathil House, Kollannoor, Eravakkad P.O.
               </p>
               <a
-                href="tel:9745770675"
-                className="inline-flex items-center gap-1.5 font-montserrat text-[11px] sm:text-xs text-gold-accent hover:text-gold-foil transition-colors mt-2 px-3 py-1 rounded-full bg-gold-primary/10 border border-gold-primary/25"
+                href="tel:+919745770675"
+                className="inline-flex items-center gap-1.5 font-montserrat text-[11px] sm:text-xs text-gold-accent hover:text-gold-foil transition-colors mt-2 px-3.5 py-1 rounded-full bg-gold-primary/10 border border-gold-primary/25 hover:border-gold-primary/50"
               >
                 <Phone className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gold-primary" />
                 <span>Ph: 97457 70675</span>
@@ -125,7 +133,10 @@ const App = () => {
             <div className="hero-reveal my-4 sm:my-8">
               {/* Groom */}
               <div className="py-1 sm:py-2">
-                <h1 className="font-cinzel text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-bold text-gold-foil tracking-wider leading-tight">
+                <h1 
+                  className="font-cinzel text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-bold text-gold-foil tracking-wider leading-tight uppercase"
+                  style={{ fontVariantLigatures: 'none' }}
+                >
                   Mohammed Shaheer
                 </h1>
               </div>
@@ -141,11 +152,14 @@ const App = () => {
 
               {/* Bride */}
               <div className="py-1 sm:py-2">
-                <h2 className="font-cinzel text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-bold text-gold-foil tracking-wider leading-tight">
+                <h2 
+                  className="font-cinzel text-2xl xs:text-3xl sm:text-5xl md:text-6xl font-bold text-gold-foil tracking-wider leading-tight uppercase"
+                  style={{ fontVariantLigatures: 'none' }}
+                >
                   Fathima Nidha
                 </h2>
                 <p className="font-cormorant italic text-sm sm:text-xl text-gold-accent mt-1.5 sm:mt-2 font-medium">
-                  D/o Mr. C K Sulaiman &amp; Mrs. Safeena Sulaiman
+                  D/o Mr. C K Sulaiman <span style={{ wordSpacing: '0.15em', margin: '0 0.15em' }}>&amp;</span> Mrs. Safeena Sulaiman
                 </p>
                 <p className="font-montserrat text-[11px] sm:text-sm text-parchment/75 mt-0.5 sm:mt-1">
                   Changarath Kuttikattil House, Thalakkassery, Kajanagar
@@ -166,12 +180,15 @@ const App = () => {
             </p>
 
             {/* Best Wishes & Family Signature */}
-            <div className="hero-reveal mt-5 sm:mt-8 pt-4 sm:pt-6 border-t border-gold-primary/35 max-w-md mx-auto">
+            <div className="hero-reveal mt-5 sm:mt-8 pt-4 sm:pt-6 pb-4 border-t border-gold-primary/35 max-w-md mx-auto">
               <p className="font-cormorant italic text-sm sm:text-lg text-parchment/80 mb-1 sm:mb-2">
                 With love and best wishes from
               </p>
-              <p className="font-cinzel text-base sm:text-xl font-bold text-gold-foil tracking-wider">
-                Zidan, Haiza, Sheikha &amp; Pathil Family
+              <p 
+                className="font-cinzel text-base sm:text-xl font-bold text-gold-foil tracking-wider uppercase pb-4"
+                style={{ fontVariantLigatures: 'none' }}
+              >
+                Zidan, Haiza, Sheikha <span style={{ wordSpacing: '0.15em', margin: '0 0.15em' }}>&amp;</span> Pathil Family
               </p>
             </div>
           </div>

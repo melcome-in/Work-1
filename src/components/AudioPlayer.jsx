@@ -342,7 +342,10 @@ const AudioPlayer = forwardRef(({ externalAudioSrc = '' }, ref) => {
       />
 
       {/* Fixed Top-Right Audio Pill */}
-      <div className="fixed top-3 right-3 sm:top-5 sm:right-5 z-50">
+      <div 
+        className="fixed z-50 transition-all duration-300"
+        style={{ top: '16px', right: '16px' }}
+      >
         <button
           type="button"
           onClick={toggleMusic}

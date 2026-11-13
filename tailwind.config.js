@@ -15,7 +15,8 @@ export default {
         'ruby-seal': '#841414',
       },
       fontFamily: {
-        cinzel: ['"Cinzel Decorative"', 'serif'],
+        cinzel: ['"Cinzel"', 'serif'],
+        'cinzel-decorative': ['"Cinzel Decorative"', 'serif'],
         amiri: ['"Amiri"', 'serif'],
         cormorant: ['"Cormorant Garamond"', 'serif'],
         montserrat: ['"Montserrat"', 'sans-serif'],
