@@ -41,12 +41,12 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
         duration: 0.28,
         ease: 'back.out(2)',
         onStart: () => {
-          // Step 2: Canvas confetti burst in gold/bronze (#D4AF37, #F3E5AB)
+          // Step 2: Canvas confetti burst in gold & burgundy wax flecks
           confetti({
-            particleCount: 75,
-            spread: 80,
+            particleCount: 85,
+            spread: 85,
             origin: { y: 0.54 },
-            colors: ['#D4AF37', '#F3E5AB', '#E8C868', '#AA771C'],
+            colors: ['#D4AF37', '#F3E5AB', '#6E1A26', '#8C2C3B', '#E8C868', '#4C101A'],
             ticks: 220,
             gravity: 0.85,
             scalar: 0.95,
@@ -291,66 +291,323 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
             </svg>
           </div>
 
-          {/* Layer 5: 3D-Embossed Ruby Wax Seal Button Centered on Flap Tip */}
+          {/* Layer 5: Bespoke Burgundy Wax Seal with Stamped "M&N" Monogram */}
           <div className="absolute left-1/2 top-[55%] -translate-x-1/2 -translate-y-1/2 z-50">
             <button
               ref={waxSealRef}
               type="button"
               onClick={handleOpenEnvelope}
               disabled={isOpening}
-              aria-label="Break the royal wax seal to open wedding invitation"
-              className="group relative w-20 h-20 sm:w-28 sm:h-28 rounded-full cursor-pointer focus:outline-none wax-seal-glow transition-transform duration-300 hover:scale-105 active:scale-95 flex items-center justify-center"
-              style={{
-                background:
-                  'radial-gradient(circle at 35% 30%, #B82525 0%, #841414 55%, #4A0808 100%)',
-              }}
+              aria-label="Break the burgundy wax seal to open wedding invitation"
+              className="group relative w-24 h-24 sm:w-32 sm:h-32 cursor-pointer focus:outline-none wax-seal-glow transition-transform duration-300 hover:scale-105 active:scale-95 flex items-center justify-center p-0 bg-transparent border-0"
             >
-              {/* Irregular Embossed Wax Outer Rim SVG */}
               <svg
-                viewBox="0 0 120 120"
-                className="absolute inset-0 w-full h-full pointer-events-none"
+                viewBox="0 0 160 160"
+                className="w-full h-full select-none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                {/* Outer scalloped wax edge */}
-                <circle
-                  cx="60"
-                  cy="60"
-                  r="55"
-                  fill="none"
-                  stroke="#D4AF37"
-                  strokeOpacity="0.55"
-                  strokeWidth="1.5"
-                  strokeDasharray="6 3"
-                />
-                {/* Recessed inner stamp ring */}
-                <circle
-                  cx="60"
-                  cy="60"
-                  r="44"
-                  fill="none"
-                  stroke="#E8C868"
-                  strokeOpacity="0.85"
-                  strokeWidth="1.8"
-                />
-                <circle
-                  cx="60"
-                  cy="60"
-                  r="39"
-                  fill="none"
-                  stroke="#D4AF37"
-                  strokeOpacity="0.4"
-                  strokeWidth="0.8"
-                />
-              </svg>
+                <defs>
+                  {/* Wax Body Radial Gradient (Key light at 32%, 26%) */}
+                  <radialGradient id="waxBodyGrad" cx="32%" cy="26%" r="72%">
+                    <stop offset="0%" stopColor="#6E1A26" />
+                    <stop offset="22%" stopColor="#52131D" />
+                    <stop offset="50%" stopColor="#3B0B13" />
+                    <stop offset="80%" stopColor="#25050A" />
+                    <stop offset="100%" stopColor="#130104" />
+                  </radialGradient>
 
-              {/* Gold Calligraphy Monogram Inside Seal */}
-              <div className="relative z-10 flex flex-col items-center justify-center text-center">
-                <span className="font-amiri text-xl sm:text-3xl font-bold text-gold-foil drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] leading-none">
-                  ش ✦ ن
-                </span>
-                <span className="font-cinzel text-[8px] sm:text-[9px] tracking-[0.22em] sm:tracking-[0.25em] text-gold-accent/90 mt-1 uppercase font-semibold">
-                  S | N
-                </span>
-              </div>
+                  {/* Recessed Stamp Dish Gradient */}
+                  <radialGradient id="waxDishGrad" cx="36%" cy="32%" r="62%">
+                    <stop offset="0%" stopColor="#460F18" />
+                    <stop offset="45%" stopColor="#350911" />
+                    <stop offset="85%" stopColor="#220409" />
+                    <stop offset="100%" stopColor="#150205" />
+                  </radialGradient>
+
+                  {/* Glossy Specular Rim Sheen Gradient */}
+                  <linearGradient id="rimSheenGrad" x1="15%" y1="10%" x2="70%" y2="55%">
+                    <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0" />
+                    <stop offset="25%" stopColor="#FFB3C0" stopOpacity="0.45" />
+                    <stop offset="45%" stopColor="#FFFFFF" stopOpacity="0.88" />
+                    <stop offset="65%" stopColor="#FFCCD5" stopOpacity="0.75" />
+                    <stop offset="85%" stopColor="#FFFFFF" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+
+                {/* 1. Organic Hand-Poured Outer Wax Puddle */}
+                <path
+                  d="M 80,6
+                     C 108,5 137,20 148,46
+                     C 157,68 155,98 144,121
+                     C 133,144 106,155 79,154
+                     C 51,153 23,143 11,119
+                     C 0,95 3,66 15,41
+                     C 27,16 53,7 80,6 Z"
+                  fill="url(#waxBodyGrad)"
+                />
+
+                {/* Outer Wax Rim Thickness & 3D Contour Bevel */}
+                <path
+                  d="M 80,8
+                     C 106,7 134,22 144,47
+                     C 153,68 151,96 141,118
+                     C 130,140 104,151 79,150
+                     C 53,149 26,139 15,116
+                     C 4,93 7,66 18,43
+                     C 29,19 54,9 80,8 Z"
+                  fill="none"
+                  stroke="#7A222F"
+                  strokeWidth="2.2"
+                  strokeOpacity="0.45"
+                />
+
+                {/* Specular High-Gloss Sheen on Upper Curved Wax Rim (Wet Lacquer) */}
+                <path
+                  d="M 28,52 C 22,34 39,20 60,13 C 80,8 106,9 126,18 C 137,24 146,36 148,48"
+                  fill="none"
+                  stroke="url(#rimSheenGrad)"
+                  strokeWidth="4.5"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M 38,42 C 48,22 72,14 96,13 C 112,13 128,19 138,28"
+                  fill="none"
+                  stroke="#FFFFFF"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeOpacity="0.75"
+                />
+
+                {/* Molten Wax Droplets & Subtle Pits matching reference */}
+                <circle cx="86" cy="11" r="1.8" fill="#180206" />
+                <circle cx="86.8" cy="11.8" r="1.2" fill="#8C2C3B" opacity="0.8" />
+                <circle cx="96" cy="138" r="1.8" fill="#180206" />
+                <circle cx="96.7" cy="138.7" r="1.2" fill="#8C2C3B" opacity="0.8" />
+                <circle cx="103" cy="139" r="1.5" fill="#180206" />
+                <circle cx="103.6" cy="139.6" r="1.0" fill="#8C2C3B" opacity="0.8" />
+
+                {/* 2. Recessed Inner Circular Stamped Dish */}
+                <circle cx="80" cy="80" r="54" fill="url(#waxDishGrad)" />
+
+                {/* Outer Stamped Ring - Shadow (top-left) & Highlight (bottom-right) */}
+                <circle
+                  cx="80"
+                  cy="80"
+                  r="53"
+                  fill="none"
+                  stroke="#120104"
+                  strokeWidth="2.2"
+                  strokeOpacity="0.85"
+                />
+                <circle
+                  cx="80.8"
+                  cy="80.8"
+                  r="53"
+                  fill="none"
+                  stroke="#762330"
+                  strokeWidth="1.6"
+                  strokeOpacity="0.65"
+                />
+
+                {/* Inner Stamped Ring - Delicate Engraved Ridge */}
+                <circle
+                  cx="80"
+                  cy="80"
+                  r="47"
+                  fill="none"
+                  stroke="#160205"
+                  strokeWidth="1.8"
+                  strokeOpacity="0.75"
+                />
+                <circle
+                  cx="80.7"
+                  cy="80.7"
+                  r="47"
+                  fill="none"
+                  stroke="#7E2634"
+                  strokeWidth="1.3"
+                  strokeOpacity="0.55"
+                />
+
+                {/* 3. Stamped Debossed Monogram "M&N" */}
+                {/* Pass A: Lower-Right 3D Bevel Catch-Light */}
+                <g transform="translate(1.2, 1.4)" fill="#872E3D" opacity="0.85">
+                  <text
+                    x="59"
+                    y="88"
+                    textAnchor="middle"
+                    fontFamily='"Cinzel", serif'
+                    fontWeight="700"
+                    fontSize="36"
+                    letterSpacing="-0.02em"
+                  >
+                    M
+                  </text>
+                  <text
+                    x="79"
+                    y="85"
+                    textAnchor="middle"
+                    fontFamily='"Great Vibes", cursive'
+                    fontSize="39"
+                    fontWeight="400"
+                  >
+                    &amp;
+                  </text>
+                  <text
+                    x="100"
+                    y="88"
+                    textAnchor="middle"
+                    fontFamily='"Cinzel", serif'
+                    fontWeight="700"
+                    fontSize="36"
+                    letterSpacing="-0.02em"
+                  >
+                    N
+                  </text>
+                </g>
+
+                {/* Pass B: Upper-Left Deep Engraved Shadow */}
+                <g transform="translate(-1.2, -1.2)" fill="#100103" opacity="0.95">
+                  <text
+                    x="59"
+                    y="88"
+                    textAnchor="middle"
+                    fontFamily='"Cinzel", serif'
+                    fontWeight="700"
+                    fontSize="36"
+                    letterSpacing="-0.02em"
+                  >
+                    M
+                  </text>
+                  <text
+                    x="79"
+                    y="85"
+                    textAnchor="middle"
+                    fontFamily='"Great Vibes", cursive'
+                    fontSize="39"
+                    fontWeight="400"
+                  >
+                    &amp;
+                  </text>
+                  <text
+                    x="100"
+                    y="88"
+                    textAnchor="middle"
+                    fontFamily='"Cinzel", serif'
+                    fontWeight="700"
+                    fontSize="36"
+                    letterSpacing="-0.02em"
+                  >
+                    N
+                  </text>
+                </g>
+
+                {/* Pass C: Stamped Wax Impression Face */}
+                <g fill="#330910">
+                  <text
+                    x="59"
+                    y="88"
+                    textAnchor="middle"
+                    fontFamily='"Cinzel", serif'
+                    fontWeight="700"
+                    fontSize="36"
+                    letterSpacing="-0.02em"
+                  >
+                    M
+                  </text>
+                  <text
+                    x="79"
+                    y="85"
+                    textAnchor="middle"
+                    fontFamily='"Great Vibes", cursive'
+                    fontSize="39"
+                    fontWeight="400"
+                  >
+                    &amp;
+                  </text>
+                  <text
+                    x="100"
+                    y="88"
+                    textAnchor="middle"
+                    fontFamily='"Cinzel", serif'
+                    fontWeight="700"
+                    fontSize="36"
+                    letterSpacing="-0.02em"
+                  >
+                    N
+                  </text>
+                </g>
+
+                {/* Pass D: Fine engraved contour */}
+                <g fill="none" stroke="#140103" strokeWidth="0.65" opacity="0.75">
+                  <text
+                    x="59"
+                    y="88"
+                    textAnchor="middle"
+                    fontFamily='"Cinzel", serif'
+                    fontWeight="700"
+                    fontSize="36"
+                    letterSpacing="-0.02em"
+                  >
+                    M
+                  </text>
+                  <text
+                    x="79"
+                    y="85"
+                    textAnchor="middle"
+                    fontFamily='"Great Vibes", cursive'
+                    fontSize="39"
+                    fontWeight="400"
+                  >
+                    &amp;
+                  </text>
+                  <text
+                    x="100"
+                    y="88"
+                    textAnchor="middle"
+                    fontFamily='"Cinzel", serif'
+                    fontWeight="700"
+                    fontSize="36"
+                    letterSpacing="-0.02em"
+                  >
+                    N
+                  </text>
+                </g>
+
+                {/* Micro-shimmer on central letters */}
+                <g fill="none" stroke="#9E3243" strokeWidth="0.5" opacity="0.4" transform="translate(0.5, 0.7)">
+                  <text
+                    x="59"
+                    y="88"
+                    textAnchor="middle"
+                    fontFamily='"Cinzel", serif'
+                    fontWeight="700"
+                    fontSize="36"
+                  >
+                    M
+                  </text>
+                  <text
+                    x="79"
+                    y="85"
+                    textAnchor="middle"
+                    fontFamily='"Great Vibes", cursive'
+                    fontSize="39"
+                  >
+                    &amp;
+                  </text>
+                  <text
+                    x="100"
+                    y="88"
+                    textAnchor="middle"
+                    fontFamily='"Cinzel", serif'
+                    fontWeight="700"
+                    fontSize="36"
+                  >
+                    N
+                  </text>
+                </g>
+              </svg>
             </button>
           </div>
         </div>
