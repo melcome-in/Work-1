@@ -16,6 +16,7 @@ const ScratchRevealDate = () => {
   const lastCheckTimeRef = useRef(0);
   const lastCanvasWidthRef = useRef(0);
 
+  // Paint the rich 24K Gold Leaf foil on the scratch canvas
   const paintGoldFoil = useCallback((force = false) => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
@@ -23,9 +24,8 @@ const ScratchRevealDate = () => {
 
     const rect = container.getBoundingClientRect();
     const width = Math.max(280, Math.floor(rect.width));
-    const height = Math.max(220, Math.floor(rect.height));
+    const height = Math.max(240, Math.floor(rect.height));
 
-    // Avoid wiping user's scratch progress on mobile address-bar resize when width hasn't changed
     if (!force && lastCanvasWidthRef.current && Math.abs(width - lastCanvasWidthRef.current) <= 2) {
       return;
     }
@@ -39,55 +39,120 @@ const ScratchRevealDate = () => {
 
     ctx.globalCompositeOperation = 'source-over';
 
-    // 1. Metallic Gold Brushed Gradient Base
+    // 1. Radiant 24K Italian Gold Leaf Metallic Gradient
     const grad = ctx.createLinearGradient(0, 0, width, height);
-    grad.addColorStop(0, '#9E7423');
-    grad.addColorStop(0.2, '#D4AF37');
-    grad.addColorStop(0.4, '#FCF6BA');
-    grad.addColorStop(0.6, '#D4AF37');
-    grad.addColorStop(0.8, '#E8C868');
-    grad.addColorStop(1, '#8E6418');
+    grad.addColorStop(0.00, '#C48F26'); // Rich antique gold edge
+    grad.addColorStop(0.12, '#E8BC46'); // Radiant gold body
+    grad.addColorStop(0.24, '#FFF7BA'); // Specular gold leaf highlight
+    grad.addColorStop(0.38, '#D8A42F'); // Warm yellow gold
+    grad.addColorStop(0.50, '#FFF9CF'); // Central sparkling sheen
+    grad.addColorStop(0.64, '#E2AF3C'); // Deep royal gold
+    grad.addColorStop(0.78, '#FFF1A8'); // Diagonal luster ray
+    grad.addColorStop(0.90, '#D69E2E'); // Warm amber gold
+    grad.addColorStop(1.00, '#A77117'); // Rich burnished gold edge
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, width, height);
 
-    // 2. Subtle Brushed Gold Foil Texture Lines
-    ctx.strokeStyle = 'rgba(255, 250, 220, 0.16)';
+    // 2. Realistic Hand-hammered Gold Leaf Texture & Creases
+    ctx.save();
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
     ctx.lineWidth = 1;
-    for (let y = 0; y < height; y += 3) {
+    for (let y = -height; y < height * 2; y += 4) {
       ctx.beginPath();
       ctx.moveTo(0, y);
-      ctx.lineTo(width, y + (Math.sin(y) * 2));
+      ctx.lineTo(width, y + width * 0.4);
       ctx.stroke();
     }
-
-    // 3. Subtle Arabesque Geometric Watermark Rings
-    ctx.save();
-    ctx.translate(width / 2, height / 2);
-    ctx.strokeStyle = 'rgba(6, 24, 18, 0.16)';
-    ctx.lineWidth = 1.2;
-    for (let i = 0; i < 8; i++) {
-      ctx.rotate(Math.PI / 4);
-      ctx.strokeRect(-65, -65, 130, 130);
-    }
-    ctx.beginPath();
-    ctx.arc(0, 0, 88, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(0, 0, 52, 0, Math.PI * 2);
-    ctx.stroke();
     ctx.restore();
 
-    // 4. Inner Ornamental Border on Foil
-    ctx.strokeStyle = 'rgba(6, 24, 18, 0.35)';
-    ctx.lineWidth = 1.5;
-    ctx.strokeRect(14, 14, width - 28, height - 28);
+    // Subtle dark foil fracture/crease lines
+    ctx.save();
+    ctx.strokeStyle = 'rgba(110, 70, 10, 0.12)';
+    ctx.lineWidth = 0.8;
+    for (let x = 0; x < width; x += 14) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x + Math.sin(x) * 16, height);
+      ctx.stroke();
+    }
+    ctx.restore();
 
-    // 5. Calligraphic Foil Text Overlay
-    ctx.fillStyle = '#061812';
+    // 3. Stamped Baroque Embossed Frame on the Gold Foil
+    ctx.save();
+    const pad = width < 420 ? 12 : 20;
+
+    // Outer Embossed Line (Highlight & Shadow)
+    ctx.strokeStyle = 'rgba(255, 255, 240, 0.65)';
+    ctx.lineWidth = 1.6;
+    ctx.strokeRect(pad, pad, width - pad * 2, height - pad * 2);
+
+    ctx.strokeStyle = 'rgba(95, 60, 10, 0.45)';
+    ctx.lineWidth = 1.4;
+    ctx.strokeRect(pad + 1.2, pad + 1.2, width - (pad + 1.2) * 2, height - (pad + 1.2) * 2);
+
+    // Inner Delicate Line
+    ctx.strokeStyle = 'rgba(255, 255, 240, 0.45)';
+    ctx.lineWidth = 1.0;
+    ctx.strokeRect(pad + 6, pad + 6, width - (pad + 6) * 2, height - (pad + 6) * 2);
+
+    // Corner Ornaments on Foil
+    const cornerSize = width < 420 ? 16 : 24;
+    const drawFoilCorner = (cx, cy, flipX, flipY) => {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.scale(flipX, flipY);
+      ctx.strokeStyle = 'rgba(255, 255, 240, 0.7)';
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.arc(0, 0, cornerSize, 0, Math.PI / 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(4, 4, cornerSize - 6, 0, Math.PI / 2);
+      ctx.stroke();
+      ctx.restore();
+    };
+    drawFoilCorner(pad + 6, pad + 6, 1, 1);
+    drawFoilCorner(width - pad - 6, pad + 6, -1, 1);
+    drawFoilCorner(pad + 6, height - pad - 6, 1, -1);
+    drawFoilCorner(width - pad - 6, height - pad - 6, -1, -1);
+    ctx.restore();
+
+    // 4. Stamped Embossed Foil Typography
+    ctx.save();
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = width < 400 ? '600 14px "Cinzel Decorative", serif' : '600 17px "Cinzel Decorative", serif';
-    ctx.fillText('Scratch to Reveal Date & Venue', width / 2, height / 2);
+
+    const centerY = height / 2;
+    const isMobile = width < 420;
+
+    // Top Cursive Calligraphy
+    ctx.font = isMobile
+      ? '32px "Great Vibes", "Alex Brush", cursive'
+      : '44px "Great Vibes", "Alex Brush", cursive';
+    // Emboss shadow
+    ctx.fillStyle = 'rgba(90, 50, 5, 0.55)';
+    ctx.fillText('Touch & Scratch', width / 2 + 1, centerY - (isMobile ? 22 : 30) + 1);
+    // Emboss face
+    ctx.fillStyle = '#422803';
+    ctx.fillText('Touch & Scratch', width / 2, centerY - (isMobile ? 22 : 30));
+
+    // Center Title
+    ctx.font = isMobile
+      ? '700 15px "Cinzel Decorative", serif'
+      : '700 20px "Cinzel Decorative", serif';
+    ctx.fillStyle = 'rgba(255, 255, 230, 0.75)';
+    ctx.fillText('REVEAL DATE & VENUE', width / 2, centerY + (isMobile ? 13 : 16) + 1);
+    ctx.fillStyle = '#3E2402';
+    ctx.fillText('REVEAL DATE & VENUE', width / 2, centerY + (isMobile ? 13 : 16));
+
+    // Bottom Badge
+    ctx.font = isMobile
+      ? '600 9px "Montserrat", sans-serif'
+      : '600 11px "Montserrat", sans-serif';
+    ctx.fillStyle = 'rgba(80, 48, 8, 0.85)';
+    ctx.fillText('✦ 24K GOLD LEAF ✦', width / 2, centerY + (isMobile ? 38 : 46));
+
+    ctx.restore();
   }, []);
 
   useEffect(() => {
@@ -110,15 +175,15 @@ const ScratchRevealDate = () => {
       const originY = (rect.top + rect.height / 2) / window.innerHeight;
 
       confetti({
-        particleCount: 65,
-        spread: 70,
+        particleCount: 70,
+        spread: 75,
         origin: {
           x: Math.min(0.9, Math.max(0.1, originX)),
           y: Math.min(0.9, Math.max(0.1, originY)),
         },
         colors: ['#D4AF37', '#E8C868', '#FAF7EE', '#F3E5AB'],
-        ticks: 190,
-        scalar: 0.9,
+        ticks: 200,
+        scalar: 0.95,
       });
     }
 
@@ -135,7 +200,7 @@ const ScratchRevealDate = () => {
     if (dateContentRef.current) {
       gsap.fromTo(
         dateContentRef.current,
-        { scale: 0.94, filter: 'brightness(1.5)' },
+        { scale: 0.94, filter: 'brightness(1.4)' },
         {
           scale: 1,
           filter: 'brightness(1)',
@@ -162,7 +227,7 @@ const ScratchRevealDate = () => {
 
     let transparentPixels = 0;
     let totalSampled = 0;
-    const stride = 16; // Sample every 4th pixel for smooth 60fps performance
+    const stride = 16;
 
     for (let i = 3; i < imageData.length; i += stride) {
       totalSampled++;
@@ -202,7 +267,7 @@ const ScratchRevealDate = () => {
     ctx.globalCompositeOperation = 'destination-out';
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    ctx.lineWidth = 52;
+    ctx.lineWidth = canvas.width < 450 ? 46 : 56;
 
     ctx.beginPath();
     if (lastPointRef.current) {
@@ -214,9 +279,8 @@ const ScratchRevealDate = () => {
     }
     ctx.stroke();
 
-    // Soft feathered brush circle
     ctx.beginPath();
-    ctx.arc(point.x, point.y, 26, 0, Math.PI * 2);
+    ctx.arc(point.x, point.y, canvas.width < 450 ? 23 : 28, 0, Math.PI * 2);
     ctx.fill();
 
     lastPointRef.current = point;
@@ -228,7 +292,7 @@ const ScratchRevealDate = () => {
       try {
         e.currentTarget.setPointerCapture(e.pointerId);
       } catch {
-        // Ignore if pointer capture is unsupported
+        // Ignore unsupported
       }
     }
     isDrawingRef.current = true;
@@ -265,65 +329,128 @@ const ScratchRevealDate = () => {
         </h3>
       </div>
 
-      {/* Scratch Card Frame */}
+      {/* Sage/Olive Embossed Textured Card Container */}
       <div
         ref={containerRef}
-        className="relative w-full min-h-[275px] sm:min-h-[300px] rounded-2xl p-3.5 sm:p-10 bg-gradient-to-b from-emerald-royal via-[#05140F] to-obsidian border-2 border-gold-primary/70 shadow-gold-glow overflow-hidden flex items-center justify-center select-none"
+        className="relative w-full min-h-[300px] sm:min-h-[340px] rounded-2xl p-4 sm:p-8 bg-gradient-to-br from-[#384C3B] via-[#2A3B2D] to-[#1D2A20] border-2 border-gold-primary/50 shadow-[0_20px_50px_rgba(0,0,0,0.8),0_0_35px_rgba(212,175,55,0.22)] overflow-hidden flex items-center justify-center select-none"
       >
-        {/* Corner Filigree Ornaments */}
-        <span className="absolute top-2.5 left-3 sm:top-3 sm:left-4 text-gold-primary/70 text-xs sm:text-sm pointer-events-none">
-          ❖
-        </span>
-        <span className="absolute top-2.5 right-3 sm:top-3 sm:right-4 text-gold-primary/70 text-xs sm:text-sm pointer-events-none">
-          ❖
-        </span>
-        <span className="absolute bottom-2.5 left-3 sm:bottom-3 sm:left-4 text-gold-primary/70 text-xs sm:text-sm pointer-events-none">
-          ❖
-        </span>
-        <span className="absolute bottom-2.5 right-3 sm:bottom-3 sm:right-4 text-gold-primary/70 text-xs sm:text-sm pointer-events-none">
-          ❖
-        </span>
+        {/* Left Side Embossed Damask Lace Watermark (Matching Reference Photo) */}
+        <svg
+          viewBox="0 0 160 380"
+          className="absolute left-0 top-0 bottom-0 w-24 sm:w-36 h-full pointer-events-none opacity-40 mix-blend-overlay"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M 10 20 C 35 15, 60 40, 45 70 C 30 100, 70 120, 50 150 C 30 180, 80 210, 40 240 C 10 260, 65 300, 35 340 C 20 360, 45 375, 10 375 Z"
+            fill="none"
+            stroke="#D6E5D8"
+            strokeWidth="2.2"
+            strokeDasharray="4 3"
+          />
+          <path
+            d="M 25 35 C 45 30, 75 55, 60 85 C 45 115, 85 135, 65 165 C 45 195, 95 225, 55 255 C 25 275, 80 315, 50 355 Z"
+            fill="none"
+            stroke="#152418"
+            strokeWidth="1.5"
+          />
+          {/* Floral Damask Rosettes */}
+          <circle cx="35" cy="80" r="14" fill="none" stroke="#D6E5D8" strokeWidth="1.5" />
+          <circle cx="35" cy="80" r="8" fill="none" stroke="#152418" strokeWidth="1" />
+          <circle cx="45" cy="190" r="16" fill="none" stroke="#D6E5D8" strokeWidth="1.5" />
+          <circle cx="45" cy="190" r="9" fill="none" stroke="#152418" strokeWidth="1" />
+          <circle cx="35" cy="300" r="14" fill="none" stroke="#D6E5D8" strokeWidth="1.5" />
+          <circle cx="35" cy="300" r="8" fill="none" stroke="#152418" strokeWidth="1" />
+        </svg>
 
-        {/* Underneath Illuminated Revealed Date Content */}
+        {/* Embossed Baroque Rectangular Filigree Frame (Matching Reference Photo) */}
+        <svg
+          viewBox="0 0 600 360"
+          className="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)]"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          {/* Shadow Pass for 3D Beveled Emboss */}
+          <g transform="translate(1, 1.5)" stroke="#122015" strokeWidth="2" fill="none">
+            {/* Outer and Inner Rects */}
+            <rect x="34" y="24" width="532" height="312" rx="4" />
+            <rect x="42" y="32" width="516" height="296" rx="3" />
+            {/* Top Center Flourish */}
+            <path d="M 240 24 C 270 12, 285 6, 300 6 C 315 6, 330 12, 360 24 C 340 30, 320 32, 300 32 C 280 32, 260 30, 240 24 Z" />
+            {/* Bottom Center Flourish */}
+            <path d="M 240 336 C 270 348, 285 354, 300 354 C 315 354, 330 348, 360 336 C 340 330, 320 328, 300 328 C 280 328, 260 330, 240 336 Z" />
+            {/* Corner Scrolls */}
+            <path d="M 34 54 C 34 38, 48 24, 64 24 M 566 54 C 566 38, 552 24, 536 24 M 34 306 C 34 322, 48 336, 64 336 M 566 306 C 566 322, 552 336, 536 336" />
+          </g>
+
+          {/* Highlight Pass for 3D Embossed Relief */}
+          <g stroke="#6B8871" strokeWidth="1.6" fill="none">
+            {/* Outer and Inner Rects */}
+            <rect x="34" y="24" width="532" height="312" rx="4" />
+            <rect x="42" y="32" width="516" height="296" rx="3" />
+            {/* Top Center Flourish */}
+            <path d="M 240 24 C 270 12, 285 6, 300 6 C 315 6, 330 12, 360 24 C 340 30, 320 32, 300 32 C 280 32, 260 30, 240 24 Z" />
+            {/* Bottom Center Flourish */}
+            <path d="M 240 336 C 270 348, 285 354, 300 354 C 315 354, 330 348, 360 336 C 340 330, 320 328, 300 328 C 280 328, 260 330, 240 336 Z" />
+            {/* Corner Scrolls */}
+            <path d="M 34 54 C 34 38, 48 24, 64 24 M 566 54 C 566 38, 552 24, 536 24 M 34 306 C 34 322, 48 336, 64 336 M 566 306 C 566 322, 552 336, 536 336" />
+          </g>
+
+          {/* Delicate Gold Trim Accent */}
+          <g stroke="#D4AF37" strokeOpacity="0.45" strokeWidth="0.8" fill="none">
+            <rect x="46" y="36" width="508" height="288" rx="2" strokeDasharray="6 3" />
+            <circle cx="300" cy="19" r="2.5" fill="#D4AF37" />
+            <circle cx="300" cy="341" r="2.5" fill="#D4AF37" />
+          </g>
+        </svg>
+
+        {/* Revealed Content: Inside the Baroque Embossed Frame */}
         <div
           ref={dateContentRef}
-          className="relative z-10 flex flex-col items-center justify-center text-center px-1 py-2 w-full"
+          className="relative z-10 flex flex-col items-center justify-center text-center px-4 py-5 w-full"
         >
-          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-gold-primary/15 border border-gold-primary/40 text-gold-accent font-montserrat text-[9px] sm:text-[10px] uppercase tracking-[0.25em] mb-2 sm:mb-3">
-            <Sparkles className="w-3 h-3" />
-            <span>1448 Rajab 03</span>
-            <Sparkles className="w-3 h-3" />
-          </div>
+          {/* Cursive Romantic Script: "Our Forever Begins In" (Matching Reference Photo) */}
+          <p className="font-script text-2xl xs:text-3xl sm:text-4xl text-[#F4EDE2] drop-shadow-[0_2px_5px_rgba(0,0,0,0.85)] font-normal tracking-wide mb-1">
+            Our Forever Begins In
+          </p>
 
-          <h4 className="font-cinzel text-xl sm:text-3xl md:text-4xl font-bold text-gold-foil tracking-wide drop-shadow-[0_0_25px_rgba(212,175,55,0.45)] mb-1 sm:mb-2">
+          {/* Date Numerals / Prominent Header */}
+          <h4 className="font-cinzel text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-wider drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] my-1 sm:my-2">
             Sunday, 13 December 2026
           </h4>
 
-          <div className="my-1.5 sm:my-2 p-2.5 sm:p-4 rounded-xl bg-obsidian/80 border border-gold-primary/40 max-w-sm sm:max-w-md mx-auto w-full">
-            <p className="font-cinzel text-sm sm:text-lg font-bold text-gold-accent leading-snug">
+          {/* Hijri Calendar Badge */}
+          <p className="font-montserrat text-[10px] sm:text-xs text-[#E3D1A6] uppercase tracking-[0.25em] font-medium mb-2.5">
+            [ 1448 Rajab 03 ]
+          </p>
+
+          {/* Venue & Time Plaque */}
+          <div className="my-1 sm:my-2 px-4 py-2 sm:px-6 sm:py-2.5 rounded-lg bg-[#18261C]/85 border border-[#D4AF37]/35 shadow-inner max-w-sm sm:max-w-md mx-auto">
+            <p className="font-cinzel text-sm sm:text-base font-bold text-[#F4EDE2]">
               HITECH REGENCY, Kozhikkara
             </p>
-            <p className="font-montserrat text-[11px] sm:text-sm text-parchment/95 mt-0.5 sm:mt-1 font-semibold">
+            <p className="font-montserrat text-[11px] sm:text-xs text-[#E5C368] mt-0.5 font-semibold">
               Time: 12:00am to 2:30pm
             </p>
-            <p className="font-montserrat text-[9px] sm:text-[10px] text-parchment/65 italic mt-0.5">
-              (Note: Printed as 12:00am in the card)
+            <p className="font-montserrat text-[9px] sm:text-[10px] text-[#C9D6CA]/75 italic mt-0.5">
+              (Printed as 12:00am in the card)
             </p>
           </div>
 
+          {/* Open in Google Maps Button */}
           <a
             href="https://maps.google.com/?q=Hitech+Regency+Convention+Centre+Kozhikkara"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 mt-1 sm:mt-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-gold-primary/20 hover:bg-gold-primary/35 border border-gold-primary/50 text-gold-accent hover:text-gold-foil font-montserrat text-[9px] sm:text-[10px] uppercase tracking-[0.18em] transition-all"
+            className="inline-flex items-center gap-1.5 mt-2 px-4 py-1.5 sm:px-5 sm:py-2 rounded-full bg-[#344837] hover:bg-[#435B47] border border-[#D4AF37]/50 text-[#F4ECE1] hover:text-white font-montserrat text-[9px] sm:text-[10px] uppercase tracking-[0.18em] shadow-md transition-all duration-300"
           >
-            <MapPin className="w-3 h-3" />
+            <MapPin className="w-3 h-3 text-[#E5C368]" />
             <span>Open in Google Maps</span>
             <ExternalLink className="w-2.5 h-2.5 opacity-70" />
           </a>
         </div>
 
-        {/* Interactive Gold Foil Canvas Overlay */}
+        {/* Interactive 24K Gold Leaf Foil Canvas Overlay */}
         <canvas
           ref={canvasRef}
           onPointerDown={handlePointerDown}
@@ -331,7 +458,7 @@ const ScratchRevealDate = () => {
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
           style={{ touchAction: 'none' }}
-          aria-label="Interactive gold foil scratch card covering the wedding date and venue"
+          aria-label="Interactive 24K gold foil scratch card covering the wedding date and venue"
           className={`absolute inset-0 z-20 w-full h-full touch-none select-none ${
             isRevealed ? 'pointer-events-none' : 'cursor-crosshair'
           }`}
@@ -342,15 +469,14 @@ const ScratchRevealDate = () => {
       <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-2.5 sm:gap-6">
         {!isRevealed ? (
           <>
-            <span className="font-montserrat text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-parchment/60">
-              {scratchPercent > 0
-                ? `${scratchPercent}% Foil Cleared`
-                : 'Touch & scratch gold leaf to reveal'}
+            <span className="font-montserrat text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-gold-accent/90 flex items-center gap-1.5 bg-gradient-to-r from-[#B8821F]/20 via-[#E8BC46]/20 to-[#B8821F]/20 px-3.5 py-1 rounded-full border border-gold-primary/30">
+              <Sparkles className="w-3 h-3 text-[#E8BC46]" />
+              <span>{scratchPercent > 0 ? `${scratchPercent}% Foil Cleared` : 'Touch & scratch gold leaf to reveal'}</span>
             </span>
             <button
               type="button"
               onClick={triggerFullReveal}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full border border-gold-primary/40 hover:border-gold-primary bg-emerald-royal/60 hover:bg-gold-primary/15 text-gold-accent font-montserrat text-[10px] sm:text-[11px] uppercase tracking-[0.2em] transition-all duration-300"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-gold-primary/50 bg-gradient-to-r from-[#C99326] via-[#E8BC46] to-[#C99326] text-[#241702] font-montserrat font-semibold text-[10px] sm:text-[11px] uppercase tracking-[0.2em] shadow-gold-glow hover:brightness-110 transition-all duration-300"
             >
               <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               <span>Instant Reveal</span>
@@ -368,4 +494,3 @@ const ScratchRevealDate = () => {
 };
 
 export default ScratchRevealDate;
-

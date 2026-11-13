@@ -19,6 +19,7 @@ export default {
         amiri: ['"Amiri"', 'serif'],
         cormorant: ['"Cormorant Garamond"', 'serif'],
         montserrat: ['"Montserrat"', 'sans-serif'],
+        script: ['"Great Vibes"', '"Alex Brush"', 'cursive'],
       },
       boxShadow: {
         'gold-glow': '0 0 35px rgba(212, 175, 55, 0.25)',
