@@ -81,17 +81,13 @@ const ScratchRevealDate = () => {
     ctx.save();
     const pad = width < 420 ? 12 : 20;
 
-    // Outer Embossed Line (Highlight & Shadow)
-    ctx.strokeStyle = 'rgba(255, 255, 240, 0.65)';
-    ctx.lineWidth = 1.6;
+    // Outer Frame Line
+    ctx.strokeStyle = 'rgba(65, 45, 10, 0.45)';
+    ctx.lineWidth = 1.4;
     ctx.strokeRect(pad, pad, width - pad * 2, height - pad * 2);
 
-    ctx.strokeStyle = 'rgba(95, 60, 10, 0.45)';
-    ctx.lineWidth = 1.4;
-    ctx.strokeRect(pad + 1.2, pad + 1.2, width - (pad + 1.2) * 2, height - (pad + 1.2) * 2);
-
     // Inner Delicate Line
-    ctx.strokeStyle = 'rgba(255, 255, 240, 0.45)';
+    ctx.strokeStyle = 'rgba(65, 45, 10, 0.45)';
     ctx.lineWidth = 1.0;
     ctx.strokeRect(pad + 6, pad + 6, width - (pad + 6) * 2, height - (pad + 6) * 2);
 
@@ -101,7 +97,7 @@ const ScratchRevealDate = () => {
       ctx.save();
       ctx.translate(cx, cy);
       ctx.scale(flipX, flipY);
-      ctx.strokeStyle = 'rgba(255, 255, 240, 0.7)';
+      ctx.strokeStyle = 'rgba(65, 45, 10, 0.45)';
       ctx.lineWidth = 1.4;
       ctx.beginPath();
       ctx.arc(0, 0, cornerSize, 0, Math.PI / 2);
@@ -129,28 +125,40 @@ const ScratchRevealDate = () => {
     ctx.font = isMobile
       ? '32px "Great Vibes", "Alex Brush", cursive'
       : '44px "Great Vibes", "Alex Brush", cursive';
-    // Emboss shadow
-    ctx.fillStyle = 'rgba(90, 50, 5, 0.55)';
-    ctx.fillText('Touch & Scratch', width / 2 + 1, centerY - (isMobile ? 22 : 30) + 1);
-    // Emboss face
-    ctx.fillStyle = '#422803';
-    ctx.fillText('Touch & Scratch', width / 2, centerY - (isMobile ? 22 : 30));
+    ctx.fillStyle = '#2A1E08';
+    ctx.fillText('Swipe to Scratch', width / 2, centerY - (isMobile ? 22 : 30));
 
-    // Center Title
+    // Center Title - Spaced to prevent tail of 'L' colliding with 'D'
     ctx.font = isMobile
       ? '700 15px "Cinzel Decorative", serif'
       : '700 20px "Cinzel Decorative", serif';
-    ctx.fillStyle = 'rgba(255, 255, 230, 0.75)';
-    ctx.fillText('REVEAL DATE & VENUE', width / 2, centerY + (isMobile ? 13 : 16) + 1);
-    ctx.fillStyle = '#3E2402';
-    ctx.fillText('REVEAL DATE & VENUE', width / 2, centerY + (isMobile ? 13 : 16));
+    ctx.fillStyle = '#2A1E08';
+    const part1 = 'REVEAL';
+    const part2 = 'DATE & VENUE';
+    const gap = isMobile ? 18 : 24;
+    const w1 = ctx.measureText(part1).width;
+    const w2 = ctx.measureText(part2).width;
+    const totalW = w1 + gap + w2;
+    const startX = (width - totalW) / 2;
+    ctx.textAlign = 'left';
+    ctx.fillText(part1, startX, centerY + (isMobile ? 13 : 16));
+    ctx.fillText(part2, startX + w1 + gap, centerY + (isMobile ? 13 : 16));
 
     // Bottom Badge
+    ctx.textAlign = 'center';
     ctx.font = isMobile
-      ? '600 9px "Montserrat", sans-serif'
+      ? '600 10px "Montserrat", sans-serif'
       : '600 11px "Montserrat", sans-serif';
-    ctx.fillStyle = 'rgba(80, 48, 8, 0.85)';
-    ctx.fillText('✦ 24K GOLD LEAF ✦', width / 2, centerY + (isMobile ? 38 : 46));
+    try {
+      ctx.letterSpacing = '0.22em';
+    } catch (e) {
+      // fallback if letterSpacing not supported on older canvas
+    }
+    ctx.fillStyle = '#2A1E08';
+    ctx.fillText('✦ SHAHEER & NIDHA ✦', width / 2, centerY + (isMobile ? 40 : 48));
+    try {
+      ctx.letterSpacing = '0px';
+    } catch (e) {}
 
     ctx.restore();
   }, []);
@@ -459,9 +467,8 @@ const ScratchRevealDate = () => {
           onPointerCancel={handlePointerUp}
           style={{ touchAction: 'none' }}
           aria-label="Interactive 24K gold foil scratch card covering the wedding date and venue"
-          className={`absolute inset-0 z-20 w-full h-full touch-none select-none ${
-            isRevealed ? 'pointer-events-none' : 'cursor-crosshair'
-          }`}
+          className={`absolute inset-0 z-20 w-full h-full touch-none select-none ${isRevealed ? 'pointer-events-none' : 'cursor-crosshair'
+            }`}
         />
       </div>
 
@@ -471,7 +478,7 @@ const ScratchRevealDate = () => {
           <>
             <span className="font-montserrat text-[10px] sm:text-[11px] tracking-[0.18em] uppercase text-gold-accent/90 flex items-center gap-1.5 bg-gradient-to-r from-[#B8821F]/20 via-[#E8BC46]/20 to-[#B8821F]/20 px-3.5 py-1 rounded-full border border-gold-primary/30">
               <Sparkles className="w-3 h-3 text-[#E8BC46]" />
-              <span>{scratchPercent > 0 ? `${scratchPercent}% Foil Cleared` : 'Touch & scratch gold leaf to reveal'}</span>
+              <span>{scratchPercent > 0 ? `${scratchPercent}% Foil Cleared` : 'Swipe to scratch gold leaf to reveal'}</span>
             </span>
             <button
               type="button"
