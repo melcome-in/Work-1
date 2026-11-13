@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import confetti from 'canvas-confetti';
-import { Sparkles, Eye } from 'lucide-react';
+import { Sparkles, Eye, MapPin, ExternalLink } from 'lucide-react';
 
 const ScratchRevealDate = () => {
   const [isRevealed, setIsRevealed] = useState(false);
@@ -86,8 +86,8 @@ const ScratchRevealDate = () => {
     ctx.fillStyle = '#061812';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = width < 400 ? '600 15px "Cinzel Decorative", serif' : '600 18px "Cinzel Decorative", serif';
-    ctx.fillText('Scratch to Reveal the Date', width / 2, height / 2);
+    ctx.font = width < 400 ? '600 14px "Cinzel Decorative", serif' : '600 17px "Cinzel Decorative", serif';
+    ctx.fillText('Scratch to Reveal Date & Venue', width / 2, height / 2);
   }, []);
 
   useEffect(() => {
@@ -258,17 +258,17 @@ const ScratchRevealDate = () => {
       {/* Section Header */}
       <div className="mb-8">
         <p className="font-montserrat text-[11px] uppercase tracking-[0.35em] text-gold-accent mb-2">
-          The Sacred Union Date
+          The Wedding Celebration
         </p>
         <h3 className="font-cinzel text-2xl sm:text-3xl text-gold-foil">
-          Unveil the Appointed Night
+          Scratch to Reveal Date &amp; Venue
         </h3>
       </div>
 
       {/* Scratch Card Frame */}
       <div
         ref={containerRef}
-        className="relative w-full min-h-[240px] sm:min-h-[260px] rounded-2xl p-6 sm:p-10 bg-gradient-to-b from-emerald-royal via-[#05140F] to-obsidian border-2 border-gold-primary/70 shadow-gold-glow overflow-hidden flex items-center justify-center select-none"
+        className="relative w-full min-h-[280px] sm:min-h-[300px] rounded-2xl p-6 sm:p-10 bg-gradient-to-b from-emerald-royal via-[#05140F] to-obsidian border-2 border-gold-primary/70 shadow-gold-glow overflow-hidden flex items-center justify-center select-none"
       >
         {/* Corner Filigree Ornaments */}
         <span className="absolute top-3 left-4 text-gold-primary/70 text-sm pointer-events-none">
@@ -287,24 +287,40 @@ const ScratchRevealDate = () => {
         {/* Underneath Illuminated Revealed Date Content */}
         <div
           ref={dateContentRef}
-          className="relative z-10 flex flex-col items-center justify-center text-center"
+          className="relative z-10 flex flex-col items-center justify-center text-center px-2 py-3 w-full"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-primary/15 border border-gold-primary/40 text-gold-accent font-montserrat text-[10px] uppercase tracking-[0.28em] mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-primary/15 border border-gold-primary/40 text-gold-accent font-montserrat text-[10px] uppercase tracking-[0.28em] mb-3">
             <Sparkles className="w-3 h-3" />
             <span>1448 Rajab 03</span>
             <Sparkles className="w-3 h-3" />
           </div>
 
-          <h4 className="font-cinzel text-2xl sm:text-4xl font-bold text-gold-foil tracking-wide drop-shadow-[0_0_25px_rgba(212,175,55,0.45)] mb-3">
+          <h4 className="font-cinzel text-2xl sm:text-3xl md:text-4xl font-bold text-gold-foil tracking-wide drop-shadow-[0_0_25px_rgba(212,175,55,0.45)] mb-2">
             Sunday, 13 December 2026
           </h4>
 
-          <p className="font-cormorant italic text-lg sm:text-xl text-parchment/90">
-            HITECH REGENCY, Kozhikkara &bull; 12:00am to 2:30pm
-          </p>
-          <p className="font-montserrat text-[10px] text-gold-primary/75 tracking-wider mt-1">
-            (Printed as 12:00am in the card)
-          </p>
+          <div className="my-2 p-3 sm:p-4 rounded-xl bg-obsidian/75 border border-gold-primary/40 max-w-md mx-auto w-full">
+            <p className="font-cinzel text-base sm:text-lg font-bold text-gold-accent">
+              HITECH REGENCY, Kozhikkara
+            </p>
+            <p className="font-montserrat text-xs sm:text-sm text-parchment/95 mt-1 font-semibold">
+              Time: 12:00am to 2:30pm
+            </p>
+            <p className="font-montserrat text-[10px] text-parchment/65 italic mt-0.5">
+              (Note: Printed as 12:00am in the card)
+            </p>
+          </div>
+
+          <a
+            href="https://maps.google.com/?q=Hitech+Regency+Convention+Centre+Kozhikkara"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-2 px-4 py-2 rounded-full bg-gold-primary/20 hover:bg-gold-primary/35 border border-gold-primary/50 text-gold-accent hover:text-gold-foil font-montserrat text-[10px] uppercase tracking-[0.2em] transition-all"
+          >
+            <MapPin className="w-3.5 h-3.5" />
+            <span>Open in Google Maps</span>
+            <ExternalLink className="w-3 h-3 opacity-70" />
+          </a>
         </div>
 
         {/* Interactive Gold Foil Canvas Overlay */}
@@ -314,7 +330,7 @@ const ScratchRevealDate = () => {
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
-          aria-label="Interactive gold foil scratch card covering the wedding date"
+          aria-label="Interactive gold foil scratch card covering the wedding date and venue"
           className={`absolute inset-0 z-20 w-full h-full touch-none ${
             isRevealed ? 'pointer-events-none' : 'cursor-crosshair'
           }`}
