@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { MailOpen } from 'lucide-react';
 
 import AmbientDust from './components/AmbientDust.jsx';
 import RoyalEnvelope from './components/RoyalEnvelope.jsx';
@@ -189,18 +188,6 @@ const App = () => {
           <p className="font-cinzel text-base sm:text-lg text-parchment/90 tracking-widest mb-3.5 sm:mb-4">
             SHAHEER &amp; NIDHA
           </p>
-
-          <button
-            type="button"
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-              setIsEnvelopeOpen(false);
-            }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border border-gold-primary/35 hover:border-gold-primary text-gold-accent font-montserrat text-[9px] sm:text-[10px] uppercase tracking-[0.2em] transition-all"
-          >
-            <MailOpen className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-            <span>Replay Wax Seal Ceremony</span>
-          </button>
 
           {/* Creator Attribution / Copyright Note */}
           <div className="mt-8 pt-6 border-t border-gold-primary/15 text-center">
