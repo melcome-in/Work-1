@@ -99,33 +99,8 @@ const App = () => {
               The most beneficent and the most merciful
             </p>
 
-            {/* Groom's Parents / Inviting Family */}
-            <div className="hero-reveal max-w-lg mx-auto mb-5 sm:mb-8 px-2 sm:px-6 py-3 sm:py-5 rounded-xl sm:rounded-2xl bg-obsidian/60 border border-gold-primary/30 shadow-inner text-center">
-              <p 
-                className="font-cinzel font-bold text-gold-foil uppercase text-center block w-full"
-                style={{
-                  fontSize: 'clamp(0.58rem, 2.75vw, 1.15rem)',
-                  whiteSpace: 'nowrap',
-                  letterSpacing: '0.015em',
-                  fontVariantLigatures: 'none',
-                }}
-              >
-                Mr. Mohammed <span style={{ wordSpacing: '0.12em', margin: '0 0.1em' }}>&amp;</span> Mrs. Shamla Mohammed
-              </p>
-              <p className="font-montserrat text-[11px] sm:text-sm text-parchment/80 mt-1">
-                Pathil House, Kollannoor, Eravakkad P.O.
-              </p>
-              <a
-                href="tel:+919745770675"
-                className="inline-flex items-center gap-1.5 font-montserrat text-[11px] sm:text-xs text-gold-accent hover:text-gold-foil transition-colors mt-2 px-3.5 py-1 rounded-full bg-gold-primary/10 border border-gold-primary/25 hover:border-gold-primary/50"
-              >
-                <Phone className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gold-primary" />
-                <span>Ph: 97457 70675</span>
-              </a>
-            </div>
-
             {/* Formal Invitation Text */}
-            <p className="hero-reveal font-cormorant text-base sm:text-2xl text-parchment/95 max-w-xl mx-auto leading-relaxed mb-4 sm:mb-6 font-medium px-2">
+            <p className="hero-reveal font-cormorant text-base sm:text-2xl text-parchment/95 max-w-xl mx-auto leading-relaxed mb-6 sm:mb-8 font-medium px-2">
               We cordially invite your esteemed presence with family on the auspicious occasion of the marriage of our son
             </p>
 
@@ -139,10 +114,23 @@ const App = () => {
                 >
                   Mohammed Shaheer
                 </h1>
+                <p className="font-cormorant italic text-sm sm:text-xl text-gold-accent mt-1.5 sm:mt-2 font-medium">
+                  S/o Mr. Mohammed <span style={{ wordSpacing: '0.15em', margin: '0 0.15em' }}>&amp;</span> Mrs. Shamla Mohammed
+                </p>
+                <p className="font-montserrat text-[11px] sm:text-sm text-parchment/75 mt-0.5 sm:mt-1">
+                  Pathil House, Kollannoor, Eravakkad P.O.
+                </p>
+                <a
+                  href="tel:+919745770675"
+                  className="inline-flex items-center gap-1.5 font-montserrat text-[10px] sm:text-xs text-gold-accent hover:text-gold-foil transition-colors mt-2 px-3 py-0.5 rounded-full bg-gold-primary/10 border border-gold-primary/25 hover:border-gold-primary/50"
+                >
+                  <Phone className="w-3 h-3 text-gold-primary" />
+                  <span>Ph: 97457 70675</span>
+                </a>
               </div>
 
               {/* With */}
-              <div className="flex items-center justify-center gap-3 sm:gap-4 my-2 sm:my-4">
+              <div className="flex items-center justify-center gap-3 sm:gap-4 my-3 sm:my-5">
                 <span className="w-10 sm:w-24 h-[1px] bg-gradient-to-r from-transparent to-gold-primary" />
                 <span className="font-cormorant italic text-xl sm:text-4xl text-gold-accent font-normal px-2">
                   With
