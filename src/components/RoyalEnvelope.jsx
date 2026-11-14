@@ -2,6 +2,284 @@ import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import confetti from 'canvas-confetti';
 
+/**
+ * Photorealistic Botanical Peony / Dahlia Blossom with Serrated Leaves & Wild Floral Sprigs
+ * Matches the vintage embossed copperplate wedding stationery relief from reference photo (envelop.JPG).
+ * Replaces the geometric concentric circle rings with authentic multi-petal botanical artwork.
+ */
+const BotanicalBlossom = ({ x, y, scale = 1, rotate = 0, mirror = false }) => {
+  const transform = `translate(${x}, ${y}) scale(${mirror ? -scale : scale}, ${scale}) rotate(${rotate})`;
+  return (
+    <g transform={transform} className="select-none pointer-events-none">
+      {/* 1. Delicate Wild Floral Sprigs (Baby's breath sprays like in envelop.JPG) */}
+      <g className="wild-sprigs">
+        {/* Shadow Layer */}
+        <g stroke="#030E07" fill="none" opacity="0.8" transform="translate(-1, -1)">
+          <path d="M 12,-18 C 30,-32 54,-38 78,-50 C 90,-56 102,-68 114,-78" strokeWidth="1.6" />
+          <path d="M 38,-28 C 50,-20 66,-18 78,-10" strokeWidth="1.2" />
+          <path d="M 58,-40 C 66,-52 78,-60 90,-68" strokeWidth="1.2" />
+          <path d="M 76,-48 C 84,-40 98,-38 108,-32" strokeWidth="1.2" />
+        </g>
+        {/* Highlight Layer */}
+        <g stroke="#1F5C40" fill="none" opacity="0.45" transform="translate(1, 1)">
+          <path d="M 12,-18 C 30,-32 54,-38 78,-50 C 90,-56 102,-68 114,-78" strokeWidth="1.2" />
+          <path d="M 38,-28 C 50,-20 66,-18 78,-10" strokeWidth="1.0" />
+          <path d="M 58,-40 C 66,-52 78,-60 90,-68" strokeWidth="1.0" />
+        </g>
+        {/* Sprig Florets Relief */}
+        <g stroke="#14422D" fill="#0C2D1F" strokeWidth="0.8" opacity="0.85">
+          <circle cx="114" cy="-78" r="3.2" />
+          <circle cx="122" cy="-74" r="2.2" />
+          <circle cx="78" cy="-10" r="3.0" />
+          <circle cx="86" cy="-14" r="2.2" />
+          <circle cx="90" cy="-68" r="3.2" />
+          <circle cx="98" cy="-64" r="2.2" />
+          <circle cx="108" cy="-32" r="3.0" />
+          <circle cx="116" cy="-35" r="2.0" />
+        </g>
+      </g>
+
+      {/* 2. Serrated Pinnate Botanical Leaves (Feathered foliage like in envelop.JPG) */}
+      <g className="foliage-leaves">
+        {/* Leaf Shadows */}
+        <g stroke="#030E07" fill="none" opacity="0.85" transform="translate(-1, -1)">
+          <path d="M -16,-20 C -32,-35 -52,-45 -74,-50 C -64,-32 -46,-18 -16,-20 Z" strokeWidth="2.0" />
+          <path d="M -16,-20 L -74,-50" strokeWidth="1.4" />
+          <path d="M -20,16 C -40,30 -62,42 -84,45 C -75,28 -52,14 -20,16 Z" strokeWidth="2.0" />
+          <path d="M -20,16 L -84,45" strokeWidth="1.4" />
+          <path d="M 16,22 C 32,42 48,64 58,84 C 44,72 26,50 16,22 Z" strokeWidth="2.0" />
+          <path d="M 16,22 L 58,84" strokeWidth="1.4" />
+        </g>
+        {/* Leaf Highlights */}
+        <g stroke="#1F5C40" fill="none" opacity="0.5" transform="translate(1, 1)">
+          <path d="M -16,-20 C -32,-35 -52,-45 -74,-50 C -64,-32 -46,-18 -16,-20 Z" strokeWidth="1.4" />
+          <path d="M -20,16 C -40,30 -62,42 -84,45 C -75,28 -52,14 -20,16 Z" strokeWidth="1.4" />
+          <path d="M 16,22 C 32,42 48,64 58,84 C 44,72 26,50 16,22 Z" strokeWidth="1.4" />
+        </g>
+        {/* Leaf Fills with Pinnate Veins */}
+        <g fill="#0B261A" stroke="#164A33" strokeWidth="1.0" opacity="0.9">
+          <path d="M -16,-20 C -32,-35 -52,-45 -74,-50 C -64,-32 -46,-18 -16,-20 Z" />
+          <path d="M -20,16 C -40,30 -62,42 -84,45 C -75,28 -52,14 -20,16 Z" />
+          <path d="M 16,22 C 32,42 48,64 58,84 C 44,72 26,50 16,22 Z" />
+          {/* Vein lines */}
+          <path d="M -16,-20 L -74,-50" fill="none" strokeWidth="1.0" stroke="#1E5C40" />
+          <path d="M -32,-28 L -38,-38 M -46,-36 L -54,-44 M -28,-22 L -22,-30" fill="none" strokeWidth="0.8" stroke="#1E5C40" />
+          <path d="M -20,16 L -84,45" fill="none" strokeWidth="1.0" stroke="#1E5C40" />
+          <path d="M -38,24 L -44,34 M -54,32 L -64,40 M -30,18 L -26,26" fill="none" strokeWidth="0.8" stroke="#1E5C40" />
+          <path d="M 16,22 L 58,84" fill="none" strokeWidth="1.0" stroke="#1E5C40" />
+          <path d="M 28,38 L 38,44 M 40,54 L 50,60 M 24,28 L 32,32" fill="none" strokeWidth="0.8" stroke="#1E5C40" />
+        </g>
+      </g>
+
+      {/* 3. Layered Organic Botanical Peony Petals (Authentic Multi-Petal Blossom) */}
+      <g className="botanical-peony-petals">
+        {/* Debossed Shadow Layer (offset -1px, -1px) */}
+        <g stroke="#030E07" fill="none" opacity="0.85" transform="translate(-1, -1)">
+          {/* Outer Petals */}
+          <path d="M 16,-8 C 30,-16 48,-14 56,-2 C 60,10 50,22 34,18 C 24,15 16,8 16,-8 Z" strokeWidth="1.8" />
+          <path d="M 14,8 C 28,18 42,32 44,46 C 36,56 22,50 12,34 C 8,24 8,14 14,8 Z" strokeWidth="1.8" />
+          <path d="M -4,16 C 6,32 10,50 -2,60 C -14,64 -26,52 -22,34 C -18,22 -10,14 -4,16 Z" strokeWidth="1.8" />
+          <path d="M -14,10 C -26,24 -42,36 -54,28 C -62,18 -52,6 -36,-2 C -24,-6 -14,2 -14,10 Z" strokeWidth="1.8" />
+          <path d="M -16,-2 C -32,4 -52,4 -58,-8 C -60,-20 -46,-28 -30,-22 C -20,-16 -12,-6 -16,-2 Z" strokeWidth="1.8" />
+          <path d="M -14,-10 C -28,-18 -44,-32 -40,-46 C -32,-56 -18,-48 -10,-32 C -6,-20 -8,-12 -14,-10 Z" strokeWidth="1.8" />
+          <path d="M 0,-16 C -6,-32 -10,-50 2,-60 C 14,-64 26,-52 22,-34 C 18,-22 10,-14 0,-16 Z" strokeWidth="1.8" />
+          <path d="M 12,-12 C 24,-26 40,-36 52,-28 C 60,-18 50,-6 34,2 C 22,6 12,-2 12,-12 Z" strokeWidth="1.8" />
+        </g>
+
+        {/* Embossed Highlight Layer (offset +1px, +1px) */}
+        <g stroke="#1F5C40" fill="none" opacity="0.5" transform="translate(1, 1)">
+          <path d="M 16,-8 C 30,-16 48,-14 56,-2 C 60,10 50,22 34,18 C 24,15 16,8 16,-8 Z" strokeWidth="1.3" />
+          <path d="M 14,8 C 28,18 42,32 44,46 C 36,56 22,50 12,34 C 8,24 8,14 14,8 Z" strokeWidth="1.3" />
+          <path d="M -4,16 C 6,32 10,50 -2,60 C -14,64 -26,52 -22,34 C -18,22 -10,14 -4,16 Z" strokeWidth="1.3" />
+          <path d="M -14,10 C -26,24 -42,36 -54,28 C -62,18 -52,6 -36,-2 C -24,-6 -14,2 -14,10 Z" strokeWidth="1.3" />
+          <path d="M -16,-2 C -32,4 -52,4 -58,-8 C -60,-20 -46,-28 -30,-22 C -20,-16 -12,-6 -16,-2 Z" strokeWidth="1.3" />
+          <path d="M -14,-10 C -28,-18 -44,-32 -40,-46 C -32,-56 -18,-48 -10,-32 C -6,-20 -8,-12 -14,-10 Z" strokeWidth="1.3" />
+          <path d="M 0,-16 C -6,-32 -10,-50 2,-60 C 14,-64 26,-52 22,-34 C 18,-22 10,-14 0,-16 Z" strokeWidth="1.3" />
+          <path d="M 12,-12 C 24,-26 40,-36 52,-28 C 60,-18 50,-6 34,2 C 22,6 12,-2 12,-12 Z" strokeWidth="1.3" />
+        </g>
+
+        {/* Outer Petal Fills (Deep Emerald Stationery Relief) */}
+        <g fill="#0A2418" stroke="#164A33" strokeWidth="1.1" opacity="0.95">
+          <path d="M 16,-8 C 30,-16 48,-14 56,-2 C 60,10 50,22 34,18 C 24,15 16,8 16,-8 Z" />
+          <path d="M 14,8 C 28,18 42,32 44,46 C 36,56 22,50 12,34 C 8,24 8,14 14,8 Z" />
+          <path d="M -4,16 C 6,32 10,50 -2,60 C -14,64 -26,52 -22,34 C -18,22 -10,14 -4,16 Z" />
+          <path d="M -14,10 C -26,24 -42,36 -54,28 C -62,18 -52,6 -36,-2 C -24,-6 -14,2 -14,10 Z" />
+          <path d="M -16,-2 C -32,4 -52,4 -58,-8 C -60,-20 -46,-28 -30,-22 C -20,-16 -12,-6 -16,-2 Z" />
+          <path d="M -14,-10 C -28,-18 -44,-32 -40,-46 C -32,-56 -18,-48 -10,-32 C -6,-20 -8,-12 -14,-10 Z" />
+          <path d="M 0,-16 C -6,-32 -10,-50 2,-60 C 14,-64 26,-52 22,-34 C 18,-22 10,-14 0,-16 Z" />
+          <path d="M 12,-12 C 24,-26 40,-36 52,-28 C 60,-18 50,-6 34,2 C 22,6 12,-2 12,-12 Z" />
+        </g>
+
+        {/* Middle Cupped Petals */}
+        <g fill="#0D2E1F" stroke="#19543A" strokeWidth="1.0" opacity="0.95">
+          <path d="M 8,-6 C 22,-10 32,-4 32,8 C 28,18 16,16 8,6 Z" />
+          <path d="M 6,8 C 14,22 8,30 -4,32 C -16,30 -16,18 -6,8 Z" />
+          <path d="M -8,6 C -22,10 -32,4 -32,-8 C -28,-18 -16,-16 -8,-6 Z" />
+          <path d="M -6,-8 C -14,-22 -8,-30 4,-32 C 16,-30 16,-18 6,-8 Z" />
+          <path d="M 10,2 C 18,12 16,22 6,24 C -4,24 -4,14 4,6 Z" />
+          <path d="M -10,-2 C -18,-12 -16,-22 -6,-24 C 4,-24 4,-14 -4,-6 Z" />
+        </g>
+
+        {/* Inner Blossom Heart */}
+        <g fill="#103625" stroke="#1F6244" strokeWidth="0.9">
+          <path d="M -8,-6 C -6,-12 6,-12 8,-6 C 10,0 2,4 -4,2 Z" />
+          <path d="M -4,2 C -2,8 6,8 6,2 C 6,-4 -2,-4 -4,2 Z" />
+          <path d="M -6,-2 C -10,0 -8,6 -2,6 C 2,6 0,-2 -6,-2 Z" />
+        </g>
+        {/* Stamen Nodes */}
+        <circle cx="-3" cy="-3" r="1.5" fill="#15422F" stroke="#257A54" strokeWidth="0.6" />
+        <circle cx="3" cy="-3" r="1.5" fill="#15422F" stroke="#257A54" strokeWidth="0.6" />
+        <circle cx="-3" cy="3" r="1.5" fill="#15422F" stroke="#257A54" strokeWidth="0.6" />
+        <circle cx="3" cy="3" r="1.5" fill="#15422F" stroke="#257A54" strokeWidth="0.6" />
+        <circle cx="0" cy="0" r="1.8" fill="#1E5C40" stroke="#329668" strokeWidth="0.6" />
+      </g>
+    </g>
+  );
+};
+
+/**
+ * Shimmering Golden Flower Contour & Radiant Petal Core
+ * Replaces the old concentric circle glow with authentic floral petal line art.
+ */
+const GoldenBotanicalBloom = ({ x, y, scale = 1, rotate = 0, mirror = false }) => {
+  const transform = `translate(${x}, ${y}) scale(${mirror ? -scale : scale}, ${scale}) rotate(${rotate})`;
+  return (
+    <g transform={transform} className="select-none pointer-events-none">
+      {/* Animated Golden Lines Tracing the Petals & Veins */}
+      <g stroke="url(#antiqueGoldGrad)" fill="none">
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M 16,-8 C 30,-16 48,-14 56,-2 C 60,10 50,22 34,18 C 24,15 16,8 16,-8 Z"
+          strokeWidth="1.6"
+          opacity="0"
+        />
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M 14,8 C 28,18 42,32 44,46 C 36,56 22,50 12,34 C 8,24 8,14 14,8 Z"
+          strokeWidth="1.6"
+          opacity="0"
+        />
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M -4,16 C 6,32 10,50 -2,60 C -14,64 -26,52 -22,34 C -18,22 -10,14 -4,16 Z"
+          strokeWidth="1.6"
+          opacity="0"
+        />
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M -14,10 C -26,24 -42,36 -54,28 C -62,18 -52,6 -36,-2 C -24,-6 -14,2 -14,10 Z"
+          strokeWidth="1.6"
+          opacity="0"
+        />
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M -16,-2 C -32,4 -52,4 -58,-8 C -60,-20 -46,-28 -30,-22 C -20,-16 -12,-6 -16,-2 Z"
+          strokeWidth="1.6"
+          opacity="0"
+        />
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M -14,-10 C -28,-18 -44,-32 -40,-46 C -32,-56 -18,-48 -10,-32 C -6,-20 -8,-12 -14,-10 Z"
+          strokeWidth="1.6"
+          opacity="0"
+        />
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M 0,-16 C -6,-32 -10,-50 2,-60 C 14,-64 26,-52 22,-34 C 18,-22 10,-14 0,-16 Z"
+          strokeWidth="1.6"
+          opacity="0"
+        />
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M 12,-12 C 24,-26 40,-36 52,-28 C 60,-18 50,-6 34,2 C 22,6 12,-2 12,-12 Z"
+          strokeWidth="1.6"
+          opacity="0"
+        />
+        {/* Golden Leaf Midribs */}
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M -16,-20 L -74,-50"
+          strokeWidth="1.4"
+          opacity="0"
+        />
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M -20,16 L -84,45"
+          strokeWidth="1.4"
+          opacity="0"
+        />
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M 16,22 L 58,84"
+          strokeWidth="1.4"
+          opacity="0"
+        />
+      </g>
+
+      {/* Radiant Golden Flower Heart Bloom (Expands & Radiates) */}
+      <g className="golden-floral-bloom" opacity="0">
+        <path
+          d="M 8,-6 C 22,-10 32,-4 32,8 C 28,18 16,16 8,6 Z"
+          fill="url(#antiqueGoldGrad)"
+          opacity="0.85"
+        />
+        <path
+          d="M 6,8 C 14,22 8,30 -4,32 C -16,30 -16,18 -6,8 Z"
+          fill="url(#antiqueGoldGrad)"
+          opacity="0.85"
+        />
+        <path
+          d="M -8,6 C -22,10 -32,4 -32,-8 C -28,-18 -16,-16 -8,-6 Z"
+          fill="url(#antiqueGoldGrad)"
+          opacity="0.85"
+        />
+        <path
+          d="M -6,-8 C -14,-22 -8,-30 4,-32 C 16,-30 16,-18 6,-8 Z"
+          fill="url(#antiqueGoldGrad)"
+          opacity="0.85"
+        />
+        {/* Core Radiance */}
+        <circle cx="0" cy="0" r="14" fill="#FFF5D6" opacity="0.9" />
+        <circle cx="0" cy="0" r="7" fill="#6B4E1B" />
+        <circle cx="0" cy="0" r="3" fill="#FFE59E" />
+      </g>
+    </g>
+  );
+};
+
 const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
   const [isOpening, setIsOpening] = useState(false);
 
@@ -302,7 +580,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
             strokeOpacity="0.45"
           />
 
-          {/* ─── Embossed Botanical Peonies, Leaves & Climbing Vines (Bottom Flap) ─── */}
+          {/* ─── Embossed Botanical Vines & Leaves (Bottom Flap) ─── */}
           <g className="select-none opacity-90">
             {/* Paper Shadow (offset -1px, -1px) */}
             <g stroke="#030E07" fill="none" opacity="0.85" transform="translate(-1, -1)">
@@ -336,7 +614,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
               <path d="M 500,20 C 506,120 494,260 500,480" strokeWidth="1.8" />
             </g>
 
-            {/* Embossed Botanical Leaves & Blooming Peonies (Paper Relief matching photo) */}
+            {/* Embossed Botanical Leaves */}
             <g fill="#0B261A" stroke="#14422D" strokeWidth="0.9" opacity="0.85">
               {/* Lower-Left Foliage Leaves */}
               <path d="M 370,120 C 345,95 305,105 285,128 C 320,140 350,138 370,120 Z" />
@@ -351,26 +629,11 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
               {/* Center Foliage Leaves */}
               <path d="M 500,160 C 475,140 440,148 425,168 C 455,178 480,175 500,160 Z" />
               <path d="M 500,240 C 525,220 560,228 575,248 C 545,258 520,255 500,240 Z" />
-
-              {/* Large Lower-Right Blooming Peony Flower */}
-              <g transform="translate(760, 370)">
-                <circle cx="0" cy="0" r="38" fill="#092116" stroke="#164A33" strokeWidth="1.6" />
-                <circle cx="0" cy="0" r="26" fill="#0C2D1F" stroke="#164A33" strokeWidth="1.3" />
-                <circle cx="0" cy="0" r="15" fill="#0F3827" stroke="#1E5C40" strokeWidth="1.0" />
-                <circle cx="0" cy="0" r="6" fill="#144631" />
-                {/* Petal scallops */}
-                <path d="M -34,0 C -34,-19 -19,-34 0,-34 C 19,-34 34,-19 34,0 C 34,19 19,34 0,34 C -19,34 -34,19 -34,0 Z" fill="none" stroke="#1D5A3E" strokeWidth="1.0" />
-              </g>
-
-              {/* Large Lower-Left Blooming Peony Flower */}
-              <g transform="translate(240, 370)">
-                <circle cx="0" cy="0" r="38" fill="#092116" stroke="#164A33" strokeWidth="1.6" />
-                <circle cx="0" cy="0" r="26" fill="#0C2D1F" stroke="#164A33" strokeWidth="1.3" />
-                <circle cx="0" cy="0" r="15" fill="#0F3827" stroke="#1E5C40" strokeWidth="1.0" />
-                <circle cx="0" cy="0" r="6" fill="#144631" />
-                <path d="M -34,0 C -34,-19 -19,-34 0,-34 C 19,-34 34,-19 34,0 C 34,19 19,34 0,34 C -19,34 -34,19 -34,0 Z" fill="none" stroke="#1D5A3E" strokeWidth="1.0" />
-              </g>
             </g>
+
+            {/* ─── Authentic Botanical Peony Blossoms (Lower Flap: Replaces Concentric Ripple Rings) ─── */}
+            <BotanicalBlossom x={760} y={370} scale={1.15} rotate={-8} />
+            <BotanicalBlossom x={240} y={370} scale={1.1} rotate={8} mirror={true} />
           </g>
 
           {/* ─── Animated Golden Lines (Bottom Flap: Traces outward from seal) ─── */}
@@ -489,19 +752,9 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
               opacity="0"
             />
 
-            {/* Radiant Golden Peony Blooms (Expand & Glow) */}
-            <g className="golden-floral-bloom" opacity="0" transform="translate(760, 370)">
-              <circle cx="0" cy="0" r="34" fill="url(#antiqueGoldGrad)" opacity="0.85" />
-              <circle cx="0" cy="0" r="22" fill="#FFF5D6" opacity="0.9" />
-              <circle cx="0" cy="0" r="11" fill="#6B4E1B" />
-              <circle cx="0" cy="0" r="4" fill="#FFE59E" />
-            </g>
-            <g className="golden-floral-bloom" opacity="0" transform="translate(240, 370)">
-              <circle cx="0" cy="0" r="34" fill="url(#antiqueGoldGrad)" opacity="0.85" />
-              <circle cx="0" cy="0" r="22" fill="#FFF5D6" opacity="0.9" />
-              <circle cx="0" cy="0" r="11" fill="#6B4E1B" />
-              <circle cx="0" cy="0" r="4" fill="#FFE59E" />
-            </g>
+            {/* Radiant Golden Botanical Peony Blooms (Replaces concentric gold circles) */}
+            <GoldenBotanicalBloom x={760} y={370} scale={1.15} rotate={-8} />
+            <GoldenBotanicalBloom x={240} y={370} scale={1.1} rotate={8} mirror={true} />
           </g>
         </svg>
       </div>
@@ -536,7 +789,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
             strokeOpacity="0.5"
           />
 
-          {/* ─── Embossed Botanical Peonies, Leaves & Climbing Vines (Top Flap) ─── */}
+          {/* ─── Embossed Botanical Vines & Leaves (Top Flap) ─── */}
           <g className="select-none opacity-90">
             {/* Paper Shadow (offset -1px, -1px) */}
             <g stroke="#030E07" fill="none" opacity="0.85" transform="translate(-1, -1)">
@@ -569,7 +822,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
               <path d="M 500,480 C 494,370 506,230 500,15" strokeWidth="1.8" />
             </g>
 
-            {/* Embossed Leaves & Upper Peony Blossoms */}
+            {/* Embossed Leaves */}
             <g fill="#0B261A" stroke="#14422D" strokeWidth="0.9" opacity="0.85">
               {/* Upper-Left Foliage Leaves */}
               <path d="M 370,360 C 345,385 305,375 285,352 C 320,340 350,342 370,360 Z" />
@@ -580,25 +833,11 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
               <path d="M 630,360 C 655,385 695,375 715,352 C 680,340 650,342 630,360 Z" />
               <path d="M 710,270 C 735,295 775,285 795,262 C 760,250 730,252 710,270 Z" />
               <path d="M 800,170 C 825,195 865,185 885,162 C 850,150 820,152 800,170 Z" />
-
-              {/* Large Upper-Left Blooming Peony Flower */}
-              <g transform="translate(240, 120)">
-                <circle cx="0" cy="0" r="38" fill="#092116" stroke="#164A33" strokeWidth="1.6" />
-                <circle cx="0" cy="0" r="26" fill="#0C2D1F" stroke="#164A33" strokeWidth="1.3" />
-                <circle cx="0" cy="0" r="15" fill="#0F3827" stroke="#1E5C40" strokeWidth="1.0" />
-                <circle cx="0" cy="0" r="6" fill="#144631" />
-                <path d="M -34,0 C -34,-19 -19,-34 0,-34 C 19,-34 34,-19 34,0 C 34,19 19,34 0,34 C -19,34 -34,19 -34,0 Z" fill="none" stroke="#1D5A3E" strokeWidth="1.0" />
-              </g>
-
-              {/* Large Upper-Right Blooming Peony Flower */}
-              <g transform="translate(760, 120)">
-                <circle cx="0" cy="0" r="38" fill="#092116" stroke="#164A33" strokeWidth="1.6" />
-                <circle cx="0" cy="0" r="26" fill="#0C2D1F" stroke="#164A33" strokeWidth="1.3" />
-                <circle cx="0" cy="0" r="15" fill="#0F3827" stroke="#1E5C40" strokeWidth="1.0" />
-                <circle cx="0" cy="0" r="6" fill="#144631" />
-                <path d="M -34,0 C -34,-19 -19,-34 0,-34 C 19,-34 34,-19 34,0 C 34,19 19,34 0,34 C -19,34 -34,19 -34,0 Z" fill="none" stroke="#1D5A3E" strokeWidth="1.0" />
-              </g>
             </g>
+
+            {/* ─── Authentic Botanical Peony Blossoms (Top Flap: Replaces Concentric Ripple Rings) ─── */}
+            <BotanicalBlossom x={240} y={120} scale={1.1} rotate={-15} />
+            <BotanicalBlossom x={760} y={120} scale={1.1} rotate={15} mirror={true} />
           </g>
 
           {/* ─── Animated Golden Lines (Top Flap: Traces upward from seal to flowers) ─── */}
@@ -717,19 +956,9 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
               opacity="0"
             />
 
-            {/* Radiant Golden Peony Blooms */}
-            <g className="golden-floral-bloom" opacity="0" transform="translate(240, 120)">
-              <circle cx="0" cy="0" r="34" fill="url(#antiqueGoldGrad)" opacity="0.85" />
-              <circle cx="0" cy="0" r="22" fill="#FFF5D6" opacity="0.9" />
-              <circle cx="0" cy="0" r="11" fill="#6B4E1B" />
-              <circle cx="0" cy="0" r="4" fill="#FFE59E" />
-            </g>
-            <g className="golden-floral-bloom" opacity="0" transform="translate(760, 120)">
-              <circle cx="0" cy="0" r="34" fill="url(#antiqueGoldGrad)" opacity="0.85" />
-              <circle cx="0" cy="0" r="22" fill="#FFF5D6" opacity="0.9" />
-              <circle cx="0" cy="0" r="11" fill="#6B4E1B" />
-              <circle cx="0" cy="0" r="4" fill="#FFE59E" />
-            </g>
+            {/* Radiant Golden Botanical Peony Blooms (Top Flap: Replaces concentric gold circles) */}
+            <GoldenBotanicalBloom x={240} y={120} scale={1.1} rotate={-15} />
+            <GoldenBotanicalBloom x={760} y={120} scale={1.1} rotate={15} mirror={true} />
           </g>
         </svg>
       </div>
