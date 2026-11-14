@@ -75,18 +75,9 @@
   border-bottom-right-radius: 16px;
 }
 
-/* Photorealistic Wax Seal Ambient Pulsing Gold Halo */
-@keyframes sealPulse {
-  0%, 100% {
-    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 14px rgba(212, 175, 55, 0.45));
-  }
-  50% {
-    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 32px rgba(243, 217, 139, 0.85)) drop-shadow(0 0 14px rgba(212, 175, 55, 0.7));
-  }
-}
-
+/* Wax Seal Static Physical Paper Drop Shadow (No Pulsing) */
 .wax-seal-glow {
-  animation: sealPulse 2.8s infinite ease-in-out;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.85));
 }
 
 /* Golden Botanical Floral Illumination on Envelope Flaps */
