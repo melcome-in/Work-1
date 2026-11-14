@@ -979,7 +979,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
       {/* ─── CENTER METADATA (Above Wax Seal) ─── */}
       <div className="absolute top-[37%] sm:top-[38%] left-0 right-0 z-40 text-center pointer-events-none px-4">
         <p className="font-cinzel text-xs sm:text-sm font-semibold text-gold-accent/90 tracking-[0.3em] uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-          SHAHEER & NIDHA • 13.12.2026
+          SHAHEER & NIDHA
         </p>
       </div>
 
