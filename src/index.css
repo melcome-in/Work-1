@@ -75,18 +75,18 @@
   border-bottom-right-radius: 16px;
 }
 
-/* Photorealistic Burgundy Wax Seal Ambient Shadow & Glow */
+/* Photorealistic Burgundy Wax Seal Ambient Pulsing Gold Halo */
 @keyframes sealPulse {
   0%, 100% {
-    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 16px rgba(100, 18, 30, 0.45));
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 14px rgba(212, 175, 55, 0.45));
   }
   50% {
-    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 28px rgba(160, 35, 55, 0.65)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.35));
+    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 30px rgba(243, 217, 139, 0.85)) drop-shadow(0 0 12px rgba(212, 175, 55, 0.7));
   }
 }
 
 .wax-seal-glow {
-  animation: sealPulse 3s infinite ease-in-out;
+  animation: sealPulse 2.8s infinite ease-in-out;
 }
 
 /* Custom Scrollbar */
