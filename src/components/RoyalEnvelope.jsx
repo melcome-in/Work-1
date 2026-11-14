@@ -17,7 +17,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
     if (isOpening) return;
     setIsOpening(true);
 
-    // 1. Trigger audio click + start background Maqam Hijaz synth
+    // 1. Trigger audio click + start background synth/song
     if (onTriggerAudio) {
       onTriggerAudio();
     }
@@ -59,7 +59,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
         },
         '-=0.75'
       )
-      // Step 3: Intense celebratory burst as flowers reach full golden bloom
+      // Step 3: Celebratory particle burst as floral artwork reaches full golden bloom
       .to(
         waxSealRef.current,
         {
@@ -68,7 +68,6 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
           duration: 0.35,
           ease: 'back.out(2)',
           onStart: () => {
-            // Canvas confetti burst in royal gold, champagne & emerald sparkles
             confetti({
               particleCount: 95,
               spread: 95,
@@ -92,7 +91,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
         },
         '<'
       )
-      // Step 4: Top flap folds upward in 3D (rotateX: -180deg, transformOrigin: "top center")
+      // Step 4: Top triangular flap folds upward in 3D (rotateX: -180deg, transformOrigin: "top center")
       .to(
         topFlapRef.current,
         {
@@ -101,7 +100,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
           duration: 0.95,
           ease: 'power2.inOut',
           onUpdate: function () {
-            // Lower flap z-index once past 90 degrees so the rising letter passes cleanly in front
+            // Lower flap z-index once past 90 degrees so rising letter passes in front
             if (this.progress() > 0.45 && topFlapRef.current) {
               topFlapRef.current.style.zIndex = '15';
             }
@@ -109,19 +108,19 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
         },
         '-=0.08'
       )
-      // Step 4: Letter card slides vertically out of the envelope cavity
+      // Step 5: Letter card slides vertically out of the envelope cavity
       .to(
         letterCardRef.current,
         {
-          y: typeof window !== 'undefined' && window.innerWidth < 640 ? -115 : -175,
+          y: typeof window !== 'undefined' && window.innerWidth < 640 ? -140 : -210,
           scale: 1.04,
-          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(212, 175, 55, 0.35)',
+          boxShadow: '0 30px 70px rgba(0, 0, 0, 0.85), 0 0 45px rgba(212, 175, 55, 0.35)',
           duration: 1.05,
           ease: 'power3.out',
         },
         '-=0.35'
       )
-      // Step 5: Envelope shell drops & fades out while the letter expands into the full-page layout
+      // Step 6: Envelope shell drops & letter expands into full page
       .to(
         envelopeShellRef.current,
         {
@@ -158,26 +157,26 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-40 flex flex-col items-center justify-center min-h-[100dvh] px-3 sm:px-4 pt-10 pb-6 sm:pt-16 sm:pb-10 bg-[#0A140F]/98 backdrop-blur-md select-none overflow-y-auto overflow-x-hidden"
+      className="fixed inset-0 z-40 flex flex-col items-center justify-center min-h-[100dvh] px-3 sm:px-6 py-4 sm:py-8 bg-[#07130E]/98 backdrop-blur-md select-none overflow-y-auto overflow-x-hidden"
     >
       {/* Ambient Radial Spotlight behind the Envelope */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(18,43,32,0.45)_0%,rgba(10,20,15,0.95)_75%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(18,48,34,0.45)_0%,rgba(7,19,14,0.98)_75%)]"
       />
 
       {/* Top Ceremonial Bismillah with Generous Viewport Spacing */}
-      <div className="relative z-10 text-center pt-2 sm:pt-6 mb-4 sm:mb-8">
+      <div className="relative z-10 text-center pt-2 sm:pt-4 mb-3 sm:mb-6">
         <p className="font-amiri text-xl sm:text-3xl text-gold-primary tracking-wide">
           بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
         </p>
       </div>
 
-      {/* 3D Perspective Stage (perspective: 1200px) */}
+      {/* 3D Perspective Stage: Stately Vertical Envelope Format (400 x 600 Ratio matching photo) */}
       <div
         ref={envelopeStageRef}
         style={{ perspective: '1200px' }}
-        className="relative z-20 w-full max-w-[325px] sm:max-w-[460px] aspect-[460/320] flex items-center justify-center"
+        className="relative z-20 w-full max-w-[340px] xs:max-w-[370px] sm:max-w-[420px] aspect-[400/600] flex items-center justify-center"
       >
         <div className="relative w-full h-full preserve-3d">
           {/* Layer 1: Back Cavity of the Envelope */}
@@ -185,29 +184,33 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
             ref={envelopeShellRef}
             className="absolute inset-0 preserve-3d pointer-events-none"
           >
-            {/* Deep Forest Emerald Backboard with Realistic Soft Drop Shadow */}
-            <div 
-              style={{ boxShadow: '0 24px 60px rgba(0, 0, 0, 0.75), 0 0 45px rgba(212, 175, 55, 0.18)' }}
-              className="absolute inset-0 rounded-xl bg-gradient-to-b from-[#16382B] via-[#122B20] to-[#0D1F17] border border-gold-primary/60"
+            {/* Deep Royal Emerald Backboard with Realistic Soft Drop Shadow */}
+            <div
+              style={{
+                boxShadow:
+                  '0 28px 75px rgba(0, 0, 0, 0.85), 0 0 50px rgba(18, 55, 38, 0.25)',
+              }}
+              className="absolute inset-0 rounded-2xl bg-gradient-to-b from-[#143A2B] via-[#0E2A1E] to-[#071810] border border-gold-primary/60"
             >
-              <div className="absolute inset-2 rounded-lg border border-gold-primary/25" />
+              <div className="absolute inset-2.5 rounded-xl border border-gold-primary/25" />
             </div>
 
-            {/* Layer 3: Front Pocket Flaps (Left, Right, Bottom) with Embossed Botanical Floral & Leaf Artwork */}
+            {/* Layer 3: Front Pocket Flaps (Left, Right, Bottom) with Full Embossed Botanical Floral Pattern */}
             <svg
-              viewBox="0 0 460 320"
+              viewBox="0 0 400 600"
               preserveAspectRatio="none"
-              className="absolute inset-0 w-full h-full z-30 rounded-xl overflow-hidden drop-shadow-[0_-6px_16px_rgba(0,0,0,0.65)]"
+              className="absolute inset-0 w-full h-full z-30 rounded-2xl overflow-hidden drop-shadow-[0_-8px_20px_rgba(0,0,0,0.65)]"
             >
               <defs>
                 <linearGradient id="leftRightFlap" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#153628" />
-                  <stop offset="50%" stopColor="#122B20" />
-                  <stop offset="100%" stopColor="#0E231A" />
+                  <stop offset="0%" stopColor="#153B2B" />
+                  <stop offset="50%" stopColor="#0E281C" />
+                  <stop offset="100%" stopColor="#081A12" />
                 </linearGradient>
                 <linearGradient id="bottomFlap" x1="50%" y1="0%" x2="50%" y2="100%">
-                  <stop offset="0%" stopColor="#173B2C" />
-                  <stop offset="100%" stopColor="#10261D" />
+                  <stop offset="0%" stopColor="#163F2E" />
+                  <stop offset="60%" stopColor="#0E281D" />
+                  <stop offset="100%" stopColor="#071810" />
                 </linearGradient>
                 <linearGradient id="goldEdge" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#8A6621" />
@@ -223,85 +226,92 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                 </linearGradient>
               </defs>
 
-              {/* Left Folded Flap */}
+              {/* Left Folded Triangular Flap */}
               <polygon
-                points="0,0 230,170 0,320"
+                points="0,0 200,300 0,600"
                 fill="url(#leftRightFlap)"
                 stroke="url(#goldEdge)"
                 strokeWidth="1.2"
               />
-              {/* Right Folded Flap */}
+              {/* Right Folded Triangular Flap */}
               <polygon
-                points="460,0 230,170 460,320"
+                points="400,0 200,300 400,600"
                 fill="url(#leftRightFlap)"
                 stroke="url(#goldEdge)"
                 strokeWidth="1.2"
               />
-              {/* Bottom Folded Pocket Flap */}
+              {/* Bottom Folded Triangular Flap meeting in the center */}
               <polygon
-                points="0,320 230,148 460,320"
+                points="0,600 200,300 400,600"
                 fill="url(#bottomFlap)"
                 stroke="url(#goldEdge)"
                 strokeWidth="1.5"
               />
 
-              {/* ─── Embossed Botanical Leaves & Floral Vines (Bottom & Side Flaps) ─── */}
-              <g className="select-none pointer-events-none opacity-85">
-                {/* Embossed Paper Shadow Layer (offset -0.8px, -0.8px) */}
-                <g stroke="#06160F" fill="none" opacity="0.75" transform="translate(-0.8, -0.8)">
-                  {/* Lower-left main vine */}
-                  <path d="M 226,165 C 195,190 160,225 125,255 C 105,270 95,278 88,288" strokeWidth="2.2" />
-                  <path d="M 180,205 C 168,212 152,210 144,202" strokeWidth="1.8" />
-                  <path d="M 150,235 C 138,242 122,240 114,232" strokeWidth="1.8" />
-                  {/* Lower-right main vine */}
-                  <path d="M 234,165 C 265,190 300,225 335,255 C 355,270 365,278 372,288" strokeWidth="2.2" />
-                  <path d="M 280,205 C 292,212 308,210 316,202" strokeWidth="1.8" />
-                  <path d="M 310,235 C 322,242 338,240 346,232" strokeWidth="1.8" />
-                  {/* Central-bottom vine */}
-                  <path d="M 230,175 C 232,210 228,255 230,302" strokeWidth="2.0" />
-                  {/* Lateral side sprigs */}
-                  <path d="M 220,165 C 160,160 105,162 45,160" strokeWidth="1.8" />
-                  <path d="M 240,165 C 300,160 355,162 415,160" strokeWidth="1.8" />
+              {/* ─── Embossed Botanical Peonies, Leaves & Branches (Bottom Flap & Sides) ─── */}
+              <g className="select-none pointer-events-none opacity-90">
+                {/* Embossed Paper Shadow Layer (offset -1px, -1px) */}
+                <g stroke="#04120A" fill="none" opacity="0.8" transform="translate(-1, -1)">
+                  {/* Lower-left main vine stem */}
+                  <path d="M 196,306 C 160,345 120,400 85,465 C 65,505 50,535 40,560" strokeWidth="2.4" />
+                  <path d="M 150,370 C 130,385 105,380 90,365" strokeWidth="2.0" />
+                  <path d="M 115,425 C 95,440 70,435 60,420" strokeWidth="1.8" />
+                  {/* Lower-right main vine stem */}
+                  <path d="M 204,306 C 240,345 280,400 315,465 C 335,505 350,535 360,560" strokeWidth="2.4" />
+                  <path d="M 250,370 C 270,385 295,380 310,365" strokeWidth="2.0" />
+                  <path d="M 285,425 C 305,440 330,435 340,420" strokeWidth="1.8" />
+                  {/* Center-bottom vertical vine */}
+                  <path d="M 200,318 C 204,380 196,470 200,575" strokeWidth="2.2" />
+                  <path d="M 200,410 C 185,425 170,420 162,410" strokeWidth="1.6" />
+                  <path d="M 200,450 C 215,465 230,460 238,450" strokeWidth="1.6" />
+                  <path d="M 200,505 C 185,520 170,515 162,505" strokeWidth="1.6" />
                 </g>
 
-                {/* Embossed Paper Highlight Layer (offset +0.8px, +0.8px) */}
-                <g stroke="#225D43" fill="none" opacity="0.45" transform="translate(0.8, 0.8)">
-                  <path d="M 226,165 C 195,190 160,225 125,255 C 105,270 95,278 88,288" strokeWidth="1.6" />
-                  <path d="M 180,205 C 168,212 152,210 144,202" strokeWidth="1.2" />
-                  <path d="M 150,235 C 138,242 122,240 114,232" strokeWidth="1.2" />
-                  <path d="M 234,165 C 265,190 300,225 335,255 C 355,270 365,278 372,288" strokeWidth="1.6" />
-                  <path d="M 280,205 C 292,212 308,210 316,202" strokeWidth="1.2" />
-                  <path d="M 310,235 C 322,242 338,240 346,232" strokeWidth="1.2" />
-                  <path d="M 230,175 C 232,210 228,255 230,302" strokeWidth="1.4" />
-                  <path d="M 220,165 C 160,160 105,162 45,160" strokeWidth="1.2" />
-                  <path d="M 240,165 C 300,160 355,162 415,160" strokeWidth="1.2" />
+                {/* Embossed Paper Highlight Layer (offset +1px, +1px) */}
+                <g stroke="#1F5C40" fill="none" opacity="0.5" transform="translate(1, 1)">
+                  <path d="M 196,306 C 160,345 120,400 85,465 C 65,505 50,535 40,560" strokeWidth="1.8" />
+                  <path d="M 150,370 C 130,385 105,380 90,365" strokeWidth="1.4" />
+                  <path d="M 115,425 C 95,440 70,435 60,420" strokeWidth="1.4" />
+                  <path d="M 204,306 C 240,345 280,400 315,465 C 335,505 350,535 360,560" strokeWidth="1.8" />
+                  <path d="M 250,370 C 270,385 295,380 310,365" strokeWidth="1.4" />
+                  <path d="M 285,425 C 305,440 330,435 340,420" strokeWidth="1.4" />
+                  <path d="M 200,318 C 204,380 196,470 200,575" strokeWidth="1.6" />
+                  <path d="M 200,410 C 185,425 170,420 162,410" strokeWidth="1.2" />
+                  <path d="M 200,450 C 215,465 230,460 238,450" strokeWidth="1.2" />
+                  <path d="M 200,505 C 185,520 170,515 162,505" strokeWidth="1.2" />
                 </g>
 
-                {/* Embossed Botanical Leaves & Petals on Emerald Paper */}
-                <g fill="#0D2E21" stroke="#164531" strokeWidth="0.8" opacity="0.8">
-                  {/* Left foliage leaves */}
-                  <path d="M 180,205 C 172,195 158,198 150,205 C 162,210 172,210 180,205 Z" />
-                  <path d="M 150,235 C 142,225 128,228 120,235 C 132,240 142,240 150,235 Z" />
-                  <path d="M 125,255 C 112,248 98,252 92,260 C 105,264 116,262 125,255 Z" />
-                  {/* Right foliage leaves */}
-                  <path d="M 280,205 C 288,195 302,198 310,205 C 298,210 288,210 280,205 Z" />
-                  <path d="M 310,235 C 318,225 332,228 340,235 C 328,240 318,240 310,235 Z" />
-                  <path d="M 335,255 C 348,248 362,252 368,260 C 355,264 344,262 335,255 Z" />
-                  {/* Central-bottom leaves */}
-                  <path d="M 230,225 C 218,218 206,224 200,232 C 212,234 222,232 230,225 Z" />
-                  <path d="M 230,255 C 242,248 254,254 260,262 C 248,264 238,262 230,255 Z" />
-                  {/* Lower-left flower petals */}
-                  <circle cx="88" cy="288" r="8" />
-                  <circle cx="82" cy="284" r="6" />
-                  <circle cx="94" cy="284" r="6" />
-                  {/* Lower-right flower petals */}
-                  <circle cx="372" cy="288" r="8" />
-                  <circle cx="366" cy="284" r="6" />
-                  <circle cx="378" cy="284" r="6" />
+                {/* Embossed Botanical Leaves & Peony Petals (Dark Emerald Paper Relief) */}
+                <g fill="#0C2D1F" stroke="#14422D" strokeWidth="0.9" opacity="0.85">
+                  {/* Lower-left foliage leaves */}
+                  <path d="M 150,370 C 140,358 122,362 112,372 C 128,378 140,378 150,370 Z" />
+                  <path d="M 115,425 C 105,412 88,416 78,426 C 94,432 106,432 115,425 Z" />
+                  <path d="M 85,465 C 70,455 52,460 45,472 C 60,476 74,474 85,465 Z" />
+                  {/* Lower-right foliage leaves */}
+                  <path d="M 250,370 C 260,358 278,362 288,372 C 272,378 260,378 250,370 Z" />
+                  <path d="M 285,425 C 295,412 312,416 322,426 C 306,432 294,432 285,425 Z" />
+                  <path d="M 315,465 C 330,455 348,460 355,472 C 340,476 326,474 315,465 Z" />
+                  {/* Large Lower-Right Blooming Peony / Dahlia Blossom (like photo) */}
+                  <g transform="translate(305, 500)">
+                    <circle cx="0" cy="0" r="24" fill="#0A2419" stroke="#164A33" strokeWidth="1.2" />
+                    <circle cx="0" cy="0" r="16" fill="#0D2E20" stroke="#164A33" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="9" fill="#103626" stroke="#1D5C40" strokeWidth="0.8" />
+                    <circle cx="0" cy="0" r="4" fill="#15422F" />
+                    {/* Layered petal scallops */}
+                    <path d="M -22,0 C -22,-12 -12,-22 0,-22 C 12,-22 22,-12 22,0 C 22,12 12,22 0,22 C -12,22 -22,12 -22,0 Z" fill="none" stroke="#1D5A3E" strokeWidth="0.8" />
+                  </g>
+                  {/* Large Lower-Left Blooming Peony / Dahlia Blossom */}
+                  <g transform="translate(95, 500)">
+                    <circle cx="0" cy="0" r="24" fill="#0A2419" stroke="#164A33" strokeWidth="1.2" />
+                    <circle cx="0" cy="0" r="16" fill="#0D2E20" stroke="#164A33" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="9" fill="#103626" stroke="#1D5C40" strokeWidth="0.8" />
+                    <circle cx="0" cy="0" r="4" fill="#15422F" />
+                    <path d="M -22,0 C -22,-12 -12,-22 0,-22 C 12,-22 22,-12 22,0 C 22,12 12,22 0,22 C -12,22 -22,12 -22,0 Z" fill="none" stroke="#1D5A3E" strokeWidth="0.8" />
+                  </g>
                 </g>
               </g>
 
-              {/* ─── Animated Golden Lines (Starts from seal, traces through flowers & leaves) ─── */}
+              {/* ─── Animated Golden Lines (Starts from center seal, surges through flowers & leaves) ─── */}
               <g className="select-none pointer-events-none">
                 {/* Lower-left golden stem */}
                 <path
@@ -309,9 +319,9 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 226,165 C 195,190 160,225 125,255 C 105,270 95,278 88,288"
+                  d="M 196,306 C 160,345 120,400 85,465 C 65,505 50,535 40,560"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.8"
+                  strokeWidth="2.0"
                   strokeLinecap="round"
                   fill="none"
                   opacity="0"
@@ -321,9 +331,9 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 180,205 C 168,212 152,210 144,202"
+                  d="M 150,370 C 130,385 105,380 90,365"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.5"
+                  strokeWidth="1.6"
                   strokeLinecap="round"
                   fill="none"
                   opacity="0"
@@ -333,9 +343,9 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 150,235 C 138,242 122,240 114,232"
+                  d="M 115,425 C 95,440 70,435 60,420"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.5"
+                  strokeWidth="1.6"
                   strokeLinecap="round"
                   fill="none"
                   opacity="0"
@@ -347,73 +357,47 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 234,165 C 265,190 300,225 335,255 C 355,270 365,278 372,288"
+                  d="M 204,306 C 240,345 280,400 315,465 C 335,505 350,535 360,560"
+                  stroke="url(#antiqueGoldGrad)"
+                  strokeWidth="2.0"
+                  strokeLinecap="round"
+                  fill="none"
+                  opacity="0"
+                />
+                <path
+                  className="golden-floral-line"
+                  pathLength="100"
+                  strokeDasharray="100"
+                  strokeDashoffset="100"
+                  d="M 250,370 C 270,385 295,380 310,365"
+                  stroke="url(#antiqueGoldGrad)"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  fill="none"
+                  opacity="0"
+                />
+                <path
+                  className="golden-floral-line"
+                  pathLength="100"
+                  strokeDasharray="100"
+                  strokeDashoffset="100"
+                  d="M 285,425 C 305,440 330,435 340,420"
+                  stroke="url(#antiqueGoldGrad)"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  fill="none"
+                  opacity="0"
+                />
+
+                {/* Center-bottom vertical golden stem */}
+                <path
+                  className="golden-floral-line"
+                  pathLength="100"
+                  strokeDasharray="100"
+                  strokeDashoffset="100"
+                  d="M 200,318 C 204,380 196,470 200,575"
                   stroke="url(#antiqueGoldGrad)"
                   strokeWidth="1.8"
-                  strokeLinecap="round"
-                  fill="none"
-                  opacity="0"
-                />
-                <path
-                  className="golden-floral-line"
-                  pathLength="100"
-                  strokeDasharray="100"
-                  strokeDashoffset="100"
-                  d="M 280,205 C 292,212 308,210 316,202"
-                  stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  fill="none"
-                  opacity="0"
-                />
-                <path
-                  className="golden-floral-line"
-                  pathLength="100"
-                  strokeDasharray="100"
-                  strokeDashoffset="100"
-                  d="M 310,235 C 322,242 338,240 346,232"
-                  stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  fill="none"
-                  opacity="0"
-                />
-
-                {/* Central-bottom golden stem */}
-                <path
-                  className="golden-floral-line"
-                  pathLength="100"
-                  strokeDasharray="100"
-                  strokeDashoffset="100"
-                  d="M 230,175 C 232,210 228,255 230,302"
-                  stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.7"
-                  strokeLinecap="round"
-                  fill="none"
-                  opacity="0"
-                />
-
-                {/* Lateral side golden sprigs */}
-                <path
-                  className="golden-floral-line"
-                  pathLength="100"
-                  strokeDasharray="100"
-                  strokeDashoffset="100"
-                  d="M 220,165 C 160,160 105,162 45,160"
-                  stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  fill="none"
-                  opacity="0"
-                />
-                <path
-                  className="golden-floral-line"
-                  pathLength="100"
-                  strokeDasharray="100"
-                  strokeDashoffset="100"
-                  d="M 240,165 C 300,160 355,162 415,160"
-                  stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.5"
                   strokeLinecap="round"
                   fill="none"
                   opacity="0"
@@ -425,9 +409,9 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 180,205 C 172,195 158,198 150,205 C 162,210 172,210 180,205 Z"
+                  d="M 150,370 C 140,358 122,362 112,372 C 128,378 140,378 150,370 Z"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.2"
+                  strokeWidth="1.3"
                   fill="none"
                   opacity="0"
                 />
@@ -436,178 +420,189 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 280,205 C 288,195 302,198 310,205 C 298,210 288,210 280,205 Z"
+                  d="M 250,370 C 260,358 278,362 288,372 C 272,378 260,378 250,370 Z"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.2"
+                  strokeWidth="1.3"
                   fill="none"
                   opacity="0"
                 />
 
-                {/* Golden Floral Blossoms (Expand & Glow) */}
-                <g className="golden-floral-bloom" opacity="0">
-                  <circle cx="88" cy="288" r="8" fill="url(#antiqueGoldGrad)" opacity="0.85" />
-                  <circle cx="82" cy="284" r="5" fill="#FFF4D0" opacity="0.9" />
-                  <circle cx="94" cy="284" r="5" fill="#FFF4D0" opacity="0.9" />
-                  <circle cx="88" cy="288" r="3.5" fill="#6B4E1B" />
+                {/* Golden Floral Blooms: Lower Peony Blossoms (Expand & Glow) */}
+                <g className="golden-floral-bloom" opacity="0" transform="translate(305, 500)">
+                  <circle cx="0" cy="0" r="22" fill="url(#antiqueGoldGrad)" opacity="0.85" />
+                  <circle cx="0" cy="0" r="14" fill="#FFF5D6" opacity="0.9" />
+                  <circle cx="0" cy="0" r="7" fill="#6B4E1B" />
+                  <circle cx="0" cy="0" r="3" fill="#FFE59E" />
                 </g>
-                <g className="golden-floral-bloom" opacity="0">
-                  <circle cx="372" cy="288" r="8" fill="url(#antiqueGoldGrad)" opacity="0.85" />
-                  <circle cx="366" cy="284" r="5" fill="#FFF4D0" opacity="0.9" />
-                  <circle cx="378" cy="284" r="5" fill="#FFF4D0" opacity="0.9" />
-                  <circle cx="372" cy="288" r="3.5" fill="#6B4E1B" />
+                <g className="golden-floral-bloom" opacity="0" transform="translate(95, 500)">
+                  <circle cx="0" cy="0" r="22" fill="url(#antiqueGoldGrad)" opacity="0.85" />
+                  <circle cx="0" cy="0" r="14" fill="#FFF5D6" opacity="0.9" />
+                  <circle cx="0" cy="0" r="7" fill="#6B4E1B" />
+                  <circle cx="0" cy="0" r="3" fill="#FFE59E" />
                 </g>
               </g>
 
-              {/* Inner Ornamental Gold Filigree Line on Bottom Flap */}
+              {/* Bottom Gold Filigree Line along flap edge */}
               <polyline
-                points="24,316 230,164 436,316"
+                points="18,594 200,306 382,594"
                 fill="none"
                 stroke="#D4AF37"
-                strokeOpacity="0.4"
+                strokeOpacity="0.45"
                 strokeWidth="1.0"
-                strokeDasharray="4 3"
               />
             </svg>
 
             {/* Outer Gold Frame Border */}
-            <div className="absolute inset-0 z-30 rounded-xl border border-gold-primary/60 pointer-events-none" />
+            <div className="absolute inset-0 z-30 rounded-2xl border border-gold-primary/60 pointer-events-none" />
           </div>
 
-          {/* Layer 2: The Royal Letter Card Seated Inside the Envelope Cavity */}
+          {/* Layer 2: The Stately Royal Letter Card Seated Inside the Envelope Cavity */}
           <div
             ref={letterCardRef}
-            className="absolute left-3 right-3 top-3 bottom-3 sm:left-5 sm:right-5 sm:top-4 sm:bottom-5 z-20 rounded-lg bg-gradient-to-b from-[#FAF7EE] via-[#F5EFE0] to-[#EDE3CC] text-obsidian p-3 sm:p-5 shadow-2xl border-2 border-gold-primary flex flex-col items-center justify-between text-center pointer-events-none"
+            className="absolute left-3 right-3 top-3 bottom-3 sm:left-5 sm:right-5 sm:top-4 sm:bottom-5 z-20 rounded-xl bg-gradient-to-b from-[#FAF7EE] via-[#F5EFE0] to-[#ECE2CC] text-obsidian p-4 sm:p-6 shadow-2xl border-2 border-gold-primary flex flex-col items-center justify-between text-center pointer-events-none"
           >
             {/* Inner Gold Double Filigree Border */}
-            <div className="w-full h-full border border-gold-primary/60 rounded p-2.5 sm:p-4 flex flex-col items-center justify-between relative">
+            <div className="w-full h-full border border-gold-primary/60 rounded-lg p-3 sm:p-5 flex flex-col items-center justify-between relative">
               {/* Corner Arabesque Accents */}
-              <span className="absolute top-1 left-1.5 sm:top-1.5 sm:left-2 text-gold-primary text-[10px] sm:text-xs">✦</span>
-              <span className="absolute top-1 right-1.5 sm:top-1.5 sm:right-2 text-gold-primary text-[10px] sm:text-xs">✦</span>
-              <span className="absolute bottom-1 left-1.5 sm:bottom-1.5 sm:left-2 text-gold-primary text-[10px] sm:text-xs">✦</span>
-              <span className="absolute bottom-1 right-1.5 sm:bottom-1.5 sm:right-2 text-gold-primary text-[10px] sm:text-xs">✦</span>
+              <span className="absolute top-1.5 left-2 text-gold-primary text-xs sm:text-sm">✦</span>
+              <span className="absolute top-1.5 right-2 text-gold-primary text-xs sm:text-sm">✦</span>
+              <span className="absolute bottom-1.5 left-2 text-gold-primary text-xs sm:text-sm">✦</span>
+              <span className="absolute bottom-1.5 right-2 text-gold-primary text-xs sm:text-sm">✦</span>
 
-              {/* Upper Section: Elegant Romantic Quote */}
-              <div className="pt-0.5 sm:pt-1">
-                <p className="font-cormorant italic text-[11px] sm:text-sm text-obsidian/85 max-w-[260px] leading-tight">
+              {/* Top Quote */}
+              <div className="pt-2 sm:pt-4">
+                <p className="font-cormorant italic text-xs sm:text-base text-obsidian/85 max-w-[280px] leading-relaxed">
                   &ldquo;love, laughter and happily ever after&rdquo;
                 </p>
               </div>
 
-              {/* Middle Clear Gap: Gives space for the wax seal resting over the flap */}
-              <div className="h-6 sm:h-9" />
-
-              {/* Visible Lower Section: Names & Date Positioned Unobstructed Below Flap Tip */}
-              <div className="w-full flex flex-col items-center pb-0.5 sm:pb-1">
-                <h2 className="font-cinzel text-base sm:text-2xl font-bold text-emerald-royal tracking-wider mb-1 leading-snug">
-                  Shaheer &amp; Nidha
+              {/* Center Royal Monogram & Couple Proclamation */}
+              <div className="my-auto py-2 flex flex-col items-center">
+                <div className="inline-block px-3.5 py-0.5 rounded-full border border-gold-primary/60 text-[10px] sm:text-xs font-cinzel font-bold text-[#8A6621] tracking-[0.25em] mb-2 bg-gold-primary/10">
+                  S | N
+                </div>
+                <h2 className="font-cinzel text-xl sm:text-3xl font-bold text-emerald-royal tracking-wider leading-snug">
+                  Mohammed Shaheer
                 </h2>
+                <p className="font-cormorant italic text-sm sm:text-lg text-[#8A6621] my-1">
+                  with
+                </p>
+                <h2 className="font-cinzel text-xl sm:text-3xl font-bold text-emerald-royal tracking-wider leading-snug">
+                  Fathima Nidha
+                </h2>
+              </div>
 
-                <div className="w-20 sm:w-28 h-[1px] bg-gradient-to-r from-transparent via-gold-primary to-transparent mb-1.5 sm:mb-2" />
-
-                <p className="font-montserrat text-[9px] sm:text-xs tracking-[0.25em] text-obsidian/80 font-medium uppercase">
+              {/* Bottom Sacred Date */}
+              <div className="w-full flex flex-col items-center pb-2 sm:pb-3">
+                <div className="w-24 sm:w-32 h-[1px] bg-gradient-to-r from-transparent via-gold-primary to-transparent mb-2" />
+                <p className="font-montserrat text-[10px] sm:text-xs tracking-[0.25em] text-obsidian/80 font-semibold uppercase">
                   13 | DECEMBER | 2026
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Layer 4: 3D Top Triangular Flap in Rich Forest Emerald with Botanical Peonies & Foliage */}
+          {/* Layer 4: 3D Top Triangular Flap with Full Embossed Botanical Peonies & Foliage (h: 50%) */}
           <div
             ref={topFlapRef}
             style={{
               transformOrigin: 'top center',
               transformStyle: 'preserve-3d',
             }}
-            className="absolute top-0 left-0 right-0 h-[51%] z-40 pointer-events-none"
+            className="absolute top-0 left-0 right-0 h-[50%] z-40 pointer-events-none"
           >
             <svg
-              viewBox="0 0 460 162"
+              viewBox="0 0 400 300"
               preserveAspectRatio="none"
-              className="w-full h-full drop-shadow-[0_12px_22px_rgba(0,0,0,0.75)]"
+              className="w-full h-full drop-shadow-[0_14px_24px_rgba(0,0,0,0.8)]"
             >
               <defs>
                 <linearGradient id="topFlapGrad" x1="50%" y1="0%" x2="50%" y2="100%">
-                  <stop offset="0%" stopColor="#194232" />
-                  <stop offset="60%" stopColor="#122B20" />
-                  <stop offset="100%" stopColor="#0E231A" />
+                  <stop offset="0%" stopColor="#184232" />
+                  <stop offset="60%" stopColor="#102D20" />
+                  <stop offset="100%" stopColor="#081A12" />
                 </linearGradient>
               </defs>
+              {/* Steep Triangular Flap Polygon pointing down to (200, 300) */}
               <polygon
-                points="0,0 460,0 230,162"
+                points="0,0 400,0 200,300"
                 fill="url(#topFlapGrad)"
                 stroke="#D4AF37"
                 strokeWidth="1.6"
               />
               <polyline
-                points="22,6 230,148 438,6"
+                points="18,6 200,288 382,6"
                 fill="none"
                 stroke="#E8C868"
                 strokeOpacity="0.45"
                 strokeWidth="1"
               />
 
-              {/* ─── Embossed Botanical Artwork (Top Flap) ─── */}
-              <g className="select-none pointer-events-none opacity-85">
+              {/* ─── Embossed Botanical Peonies & Leaves (Top Flap) ─── */}
+              <g className="select-none pointer-events-none opacity-90">
                 {/* Embossed Paper Shadows */}
-                <g stroke="#05140D" fill="none" opacity="0.7" transform="translate(-0.8, -0.8)">
-                  {/* Left Climbing Vine */}
-                  <path d="M 226,155 C 195,130 160,95 125,65 C 105,50 95,45 88,40" strokeWidth="2.2" />
-                  <path d="M 175,115 C 160,105 145,110 135,118" strokeWidth="1.8" />
-                  <path d="M 140,85 C 140,65 155,50 168,42" strokeWidth="1.8" />
-                  {/* Right Climbing Vine */}
-                  <path d="M 234,155 C 265,130 300,95 335,65 C 355,50 365,45 372,40" strokeWidth="2.2" />
-                  <path d="M 285,115 C 300,105 315,110 325,118" strokeWidth="1.8" />
-                  <path d="M 320,85 C 320,65 305,50 292,42" strokeWidth="1.8" />
-                  {/* Central Ascending Sprig */}
-                  <path d="M 230,145 C 228,105 232,65 230,25" strokeWidth="2.0" />
+                <g stroke="#04120A" fill="none" opacity="0.8" transform="translate(-1, -1)">
+                  {/* Left climbing vine */}
+                  <path d="M 196,294 C 160,250 120,195 85,130 C 65,90 50,60 40,35" strokeWidth="2.4" />
+                  <path d="M 150,225 C 130,210 105,215 90,230" strokeWidth="2.0" />
+                  <path d="M 115,170 C 95,155 70,160 60,175" strokeWidth="1.8" />
+                  {/* Right climbing vine */}
+                  <path d="M 204,294 C 240,250 280,195 315,130 C 335,90 350,60 360,35" strokeWidth="2.4" />
+                  <path d="M 250,225 C 270,210 295,215 310,230" strokeWidth="2.0" />
+                  <path d="M 285,170 C 305,155 330,160 340,175" strokeWidth="1.8" />
+                  {/* Center-top climbing vine */}
+                  <path d="M 200,282 C 196,220 204,130 200,25" strokeWidth="2.2" />
+                  <path d="M 200,190 C 185,175 170,180 162,190" strokeWidth="1.6" />
+                  <path d="M 200,150 C 215,135 230,140 238,150" strokeWidth="1.6" />
                 </g>
 
                 {/* Embossed Paper Highlights */}
-                <g stroke="#225D43" fill="none" opacity="0.45" transform="translate(0.8, 0.8)">
-                  <path d="M 226,155 C 195,130 160,95 125,65 C 105,50 95,45 88,40" strokeWidth="1.6" />
-                  <path d="M 175,115 C 160,105 145,110 135,118" strokeWidth="1.2" />
-                  <path d="M 140,85 C 140,65 155,50 168,42" strokeWidth="1.2" />
-                  <path d="M 234,155 C 265,130 300,95 335,65 C 355,50 365,45 372,40" strokeWidth="1.6" />
-                  <path d="M 285,115 C 300,105 315,110 325,118" strokeWidth="1.2" />
-                  <path d="M 320,85 C 320,65 305,50 292,42" strokeWidth="1.2" />
-                  <path d="M 230,145 C 228,105 232,65 230,25" strokeWidth="1.4" />
+                <g stroke="#1F5C40" fill="none" opacity="0.5" transform="translate(1, 1)">
+                  <path d="M 196,294 C 160,250 120,195 85,130 C 65,90 50,60 40,35" strokeWidth="1.8" />
+                  <path d="M 150,225 C 130,210 105,215 90,230" strokeWidth="1.4" />
+                  <path d="M 115,170 C 95,155 70,160 60,175" strokeWidth="1.4" />
+                  <path d="M 204,294 C 240,250 280,195 315,130 C 335,90 350,60 360,35" strokeWidth="1.8" />
+                  <path d="M 250,225 C 270,210 295,215 310,230" strokeWidth="1.4" />
+                  <path d="M 285,170 C 305,155 330,160 340,175" strokeWidth="1.4" />
+                  <path d="M 200,282 C 196,220 204,130 200,25" strokeWidth="1.6" />
                 </g>
 
-                {/* Embossed Leaves & Blossoms */}
-                <g fill="#0D2E21" stroke="#164531" strokeWidth="0.8" opacity="0.8">
-                  {/* Left foliage leaves */}
-                  <path d="M 175,115 C 168,105 155,108 148,114 C 158,118 168,118 175,115 Z" />
-                  <path d="M 140,85 C 148,75 160,78 168,84 C 158,88 148,88 140,85 Z" />
-                  <path d="M 115,60 C 102,52 88,56 82,64 C 95,68 106,66 115,60 Z" />
-                  {/* Right foliage leaves */}
-                  <path d="M 285,115 C 292,105 305,108 312,114 C 302,118 292,118 285,115 Z" />
-                  <path d="M 320,85 C 312,75 300,78 292,84 C 302,88 312,88 320,85 Z" />
-                  <path d="M 345,60 C 358,52 372,56 378,64 C 365,68 354,66 345,60 Z" />
-                  {/* Central Leaves */}
-                  <path d="M 230,105 C 218,98 206,104 200,112 C 212,114 222,112 230,105 Z" />
-                  <path d="M 230,75 C 242,68 254,74 260,82 C 248,84 238,82 230,75 Z" />
-                  {/* Left Peony Blossom */}
-                  <circle cx="88" cy="40" r="10" />
-                  <circle cx="80" cy="35" r="7" />
-                  <circle cx="96" cy="35" r="7" />
-                  {/* Right Peony Blossom */}
-                  <circle cx="372" cy="40" r="10" />
-                  <circle cx="364" cy="35" r="7" />
-                  <circle cx="380" cy="35" r="7" />
+                {/* Embossed Leaves & Upper Peony Blossoms */}
+                <g fill="#0C2D1F" stroke="#14422D" strokeWidth="0.9" opacity="0.85">
+                  <path d="M 150,225 C 140,238 122,234 112,224 C 128,218 140,218 150,225 Z" />
+                  <path d="M 115,170 C 105,182 88,178 78,168 C 94,162 106,162 115,170 Z" />
+                  <path d="M 250,225 C 260,238 278,234 288,224 C 272,218 260,218 250,225 Z" />
+                  <path d="M 285,170 C 295,182 312,178 322,168 C 306,162 294,162 285,170 Z" />
+                  {/* Large Upper-Left Blooming Peony / Dahlia Blossom */}
+                  <g transform="translate(95, 100)">
+                    <circle cx="0" cy="0" r="24" fill="#0A2419" stroke="#164A33" strokeWidth="1.2" />
+                    <circle cx="0" cy="0" r="16" fill="#0D2E20" stroke="#164A33" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="9" fill="#103626" stroke="#1D5C40" strokeWidth="0.8" />
+                    <circle cx="0" cy="0" r="4" fill="#15422F" />
+                    <path d="M -22,0 C -22,-12 -12,-22 0,-22 C 12,-22 22,-12 22,0 C 22,12 12,22 0,22 C -12,22 -22,12 -22,0 Z" fill="none" stroke="#1D5A3E" strokeWidth="0.8" />
+                  </g>
+                  {/* Large Upper-Right Blooming Peony / Dahlia Blossom */}
+                  <g transform="translate(305, 100)">
+                    <circle cx="0" cy="0" r="24" fill="#0A2419" stroke="#164A33" strokeWidth="1.2" />
+                    <circle cx="0" cy="0" r="16" fill="#0D2E20" stroke="#164A33" strokeWidth="1" />
+                    <circle cx="0" cy="0" r="9" fill="#103626" stroke="#1D5C40" strokeWidth="0.8" />
+                    <circle cx="0" cy="0" r="4" fill="#15422F" />
+                    <path d="M -22,0 C -22,-12 -12,-22 0,-22 C 12,-22 22,-12 22,0 C 22,12 12,22 0,22 C -12,22 -22,12 -22,0 Z" fill="none" stroke="#1D5A3E" strokeWidth="0.8" />
+                  </g>
                 </g>
               </g>
 
-              {/* ─── Animated Golden Lines (Top Flap - Starts from seal, branches into blossoms) ─── */}
+              {/* ─── Animated Golden Lines (Top Flap - Races upward from seal to flowers) ─── */}
               <g className="select-none pointer-events-none">
-                {/* Left climbing golden stem */}
+                {/* Upper-left golden stem */}
                 <path
                   className="golden-floral-line"
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 226,155 C 195,130 160,95 125,65 C 105,50 95,45 88,40"
+                  d="M 196,294 C 160,250 120,195 85,130 C 65,90 50,60 40,35"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.8"
+                  strokeWidth="2.0"
                   strokeLinecap="round"
                   fill="none"
                   opacity="0"
@@ -617,9 +612,9 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 175,115 C 160,105 145,110 135,118"
+                  d="M 150,225 C 130,210 105,215 90,230"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.5"
+                  strokeWidth="1.6"
                   strokeLinecap="round"
                   fill="none"
                   opacity="0"
@@ -629,61 +624,61 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 140,85 C 140,65 155,50 168,42"
+                  d="M 115,170 C 95,155 70,160 60,175"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  fill="none"
-                  opacity="0"
-                />
-
-                {/* Right climbing golden stem */}
-                <path
-                  className="golden-floral-line"
-                  pathLength="100"
-                  strokeDasharray="100"
-                  strokeDashoffset="100"
-                  d="M 234,155 C 265,130 300,95 335,65 C 355,50 365,45 372,40"
-                  stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  fill="none"
-                  opacity="0"
-                />
-                <path
-                  className="golden-floral-line"
-                  pathLength="100"
-                  strokeDasharray="100"
-                  strokeDashoffset="100"
-                  d="M 285,115 C 300,105 315,110 325,118"
-                  stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  fill="none"
-                  opacity="0"
-                />
-                <path
-                  className="golden-floral-line"
-                  pathLength="100"
-                  strokeDasharray="100"
-                  strokeDashoffset="100"
-                  d="M 320,85 C 320,65 305,50 292,42"
-                  stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.5"
+                  strokeWidth="1.6"
                   strokeLinecap="round"
                   fill="none"
                   opacity="0"
                 />
 
-                {/* Central ascending golden stem */}
+                {/* Upper-right golden stem */}
                 <path
                   className="golden-floral-line"
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 230,145 C 228,105 232,65 230,25"
+                  d="M 204,294 C 240,250 280,195 315,130 C 335,90 350,60 360,35"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.7"
+                  strokeWidth="2.0"
+                  strokeLinecap="round"
+                  fill="none"
+                  opacity="0"
+                />
+                <path
+                  className="golden-floral-line"
+                  pathLength="100"
+                  strokeDasharray="100"
+                  strokeDashoffset="100"
+                  d="M 250,225 C 270,210 295,215 310,230"
+                  stroke="url(#antiqueGoldGrad)"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  fill="none"
+                  opacity="0"
+                />
+                <path
+                  className="golden-floral-line"
+                  pathLength="100"
+                  strokeDasharray="100"
+                  strokeDashoffset="100"
+                  d="M 285,170 C 305,155 330,160 340,175"
+                  stroke="url(#antiqueGoldGrad)"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  fill="none"
+                  opacity="0"
+                />
+
+                {/* Center-top vertical golden stem */}
+                <path
+                  className="golden-floral-line"
+                  pathLength="100"
+                  strokeDasharray="100"
+                  strokeDashoffset="100"
+                  d="M 200,282 C 196,220 204,130 200,25"
+                  stroke="url(#antiqueGoldGrad)"
+                  strokeWidth="1.8"
                   strokeLinecap="round"
                   fill="none"
                   opacity="0"
@@ -695,9 +690,9 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 175,115 C 168,105 155,108 148,114 C 158,118 168,118 175,115 Z"
+                  d="M 150,225 C 140,238 122,234 112,224 C 128,218 140,218 150,225 Z"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.2"
+                  strokeWidth="1.3"
                   fill="none"
                   opacity="0"
                 />
@@ -706,39 +701,39 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   pathLength="100"
                   strokeDasharray="100"
                   strokeDashoffset="100"
-                  d="M 285,115 C 292,105 305,108 312,114 C 302,118 292,118 285,115 Z"
+                  d="M 250,225 C 260,238 278,234 288,224 C 272,218 260,218 250,225 Z"
                   stroke="url(#antiqueGoldGrad)"
-                  strokeWidth="1.2"
+                  strokeWidth="1.3"
                   fill="none"
                   opacity="0"
                 />
 
-                {/* Golden Peony Blossoms (Bloom & Glow) */}
-                <g className="golden-floral-bloom" opacity="0">
-                  <circle cx="88" cy="40" r="10" fill="url(#antiqueGoldGrad)" opacity="0.85" />
-                  <circle cx="80" cy="35" r="6" fill="#FFF4D0" opacity="0.9" />
-                  <circle cx="96" cy="35" r="6" fill="#FFF4D0" opacity="0.9" />
-                  <circle cx="88" cy="40" r="4" fill="#6B4E1B" />
+                {/* Golden Peony Blossoms (Bloom & Glow on Top Flap) */}
+                <g className="golden-floral-bloom" opacity="0" transform="translate(95, 100)">
+                  <circle cx="0" cy="0" r="22" fill="url(#antiqueGoldGrad)" opacity="0.85" />
+                  <circle cx="0" cy="0" r="14" fill="#FFF5D6" opacity="0.9" />
+                  <circle cx="0" cy="0" r="7" fill="#6B4E1B" />
+                  <circle cx="0" cy="0" r="3" fill="#FFE59E" />
                 </g>
-                <g className="golden-floral-bloom" opacity="0">
-                  <circle cx="372" cy="40" r="10" fill="url(#antiqueGoldGrad)" opacity="0.85" />
-                  <circle cx="364" cy="35" r="6" fill="#FFF4D0" opacity="0.9" />
-                  <circle cx="380" cy="35" r="6" fill="#FFF4D0" opacity="0.9" />
-                  <circle cx="372" cy="40" r="4" fill="#6B4E1B" />
+                <g className="golden-floral-bloom" opacity="0" transform="translate(305, 100)">
+                  <circle cx="0" cy="0" r="22" fill="url(#antiqueGoldGrad)" opacity="0.85" />
+                  <circle cx="0" cy="0" r="14" fill="#FFF5D6" opacity="0.9" />
+                  <circle cx="0" cy="0" r="7" fill="#6B4E1B" />
+                  <circle cx="0" cy="0" r="3" fill="#FFE59E" />
                 </g>
               </g>
             </svg>
           </div>
 
-          {/* Layer 5: Pearl Ivory & Gold Stamped Wax Seal with Floral Bouquet & S | N Monogram */}
-          <div className="absolute left-1/2 top-[50.5%] -translate-x-1/2 -translate-y-1/2 z-50">
+          {/* Layer 5: Pearl Ivory & Gold Stamped Wax Seal Centered Exactly where Flaps Meet (50% / 50%) */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
             <button
               ref={waxSealRef}
               type="button"
               onClick={handleOpenEnvelope}
               disabled={isOpening}
               aria-label="Break the royal wax seal to open wedding invitation"
-              className="group relative w-22 h-22 sm:w-28 sm:h-28 cursor-pointer focus:outline-none wax-seal-glow transition-transform duration-300 hover:scale-105 active:scale-95 flex items-center justify-center p-0 bg-transparent border-0"
+              className="group relative w-24 h-24 sm:w-32 sm:h-32 cursor-pointer focus:outline-none wax-seal-glow transition-transform duration-300 hover:scale-105 active:scale-95 flex items-center justify-center p-0 bg-transparent border-0"
             >
               <svg
                 viewBox="0 0 160 160"
@@ -775,7 +770,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   {/* Glossy Specular Rim Sheen Gradient */}
                   <linearGradient id="ivoryRimSheen" x1="15%" y1="10%" x2="70%" y2="55%">
                     <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0" />
-                    <stop offset="30%" stopColor="#FFFFFF" stopOpacity="0.8" />
+                    <stop offset="30%" stopColor="#FFFFFF" stopOpacity="0.85" />
                     <stop offset="55%" stopColor="#FFFDF9" stopOpacity="0.95" />
                     <stop offset="80%" stopColor="#FFFFFF" stopOpacity="0.4" />
                     <stop offset="100%" stopColor="#FFFFFF" stopOpacity="0" />
@@ -875,8 +870,7 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                   strokeOpacity="0.85"
                 />
 
-                {/* 3. Embossed Botanical Bouquet (Matching Photo) with Gold S | N Monogram */}
-                {/* Botanical Bouquet Sprig */}
+                {/* 3. Embossed Botanical Bouquet (Matching Reference Photo) */}
                 <g transform="translate(0, -6)">
                   {/* Stem & Leaves Shadow */}
                   <g stroke="#8A7660" fill="none" strokeWidth="1.6" opacity="0.6" transform="translate(-0.8, -0.8)">
@@ -893,15 +887,14 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
                     <path d="M 86,68 C 92,66 96,70 98,73" />
                   </g>
 
-                  {/* Left Daisy/Rose Blossom */}
+                  {/* Left Daisy/Wild Rose Blossom */}
                   <g transform="translate(68, 59)">
                     <circle cx="0" cy="0" r="8" fill="#EDE4D5" stroke="#9E8A73" strokeWidth="0.8" />
                     <circle cx="0" cy="0" r="3" fill="url(#sealGoldGrad)" />
-                    {/* Petal radial accents */}
                     <path d="M -7,0 L -3,0 M 7,0 L 3,0 M 0,-7 L 0,-3 M 0,7 L 0,3" stroke="url(#sealGoldGrad)" strokeWidth="0.9" />
                   </g>
 
-                  {/* Right Daisy/Rose Blossom */}
+                  {/* Right Daisy/Wild Rose Blossom */}
                   <g transform="translate(92, 57)">
                     <circle cx="0" cy="0" r="7.5" fill="#EDE4D5" stroke="#9E8A73" strokeWidth="0.8" />
                     <circle cx="0" cy="0" r="2.8" fill="url(#sealGoldGrad)" />
@@ -1014,15 +1007,15 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
       </div>
 
       {/* Interactive Call-to-Action Below Envelope */}
-      <div ref={promptTextRef} className="relative z-20 mt-5 sm:mt-12 px-2 text-center">
+      <div ref={promptTextRef} className="relative z-20 mt-4 sm:mt-8 px-2 text-center">
         <button
           type="button"
           onClick={handleOpenEnvelope}
           disabled={isOpening}
-          className="group inline-flex flex-col items-center gap-2 focus:outline-none"
+          className="group inline-flex flex-col items-center gap-1.5 focus:outline-none cursor-pointer"
         >
-          <span className="font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.22em] sm:tracking-[0.35em] text-gold-accent group-hover:text-parchment transition-colors">
-            Touch the Royal Wax Seal to Unseal
+          <span className="font-montserrat text-[10px] sm:text-xs uppercase tracking-[0.25em] sm:tracking-[0.35em] text-gold-accent group-hover:text-parchment transition-colors">
+            Tap the Royal Wax Seal to Unseal
           </span>
           <span className="w-16 h-[1px] bg-gradient-to-r from-transparent via-gold-primary to-transparent group-hover:w-28 transition-all duration-500" />
         </button>
@@ -1032,4 +1025,3 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
 };
 
 export default RoyalEnvelope;
-
