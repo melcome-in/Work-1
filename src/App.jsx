@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { MailOpen, Phone } from 'lucide-react';
+import { MailOpen } from 'lucide-react';
 
 import AmbientDust from './components/AmbientDust.jsx';
 import RoyalEnvelope from './components/RoyalEnvelope.jsx';
@@ -120,13 +120,6 @@ const App = () => {
                 <p className="font-montserrat text-[11px] sm:text-sm text-parchment/75 mt-0.5 sm:mt-1">
                   Pathil House, Kollannoor, Eravakkad P.O.
                 </p>
-                <a
-                  href="tel:+919745770675"
-                  className="inline-flex items-center gap-1.5 font-montserrat text-[10px] sm:text-xs text-gold-accent hover:text-gold-foil transition-colors mt-2 px-3 py-0.5 rounded-full bg-gold-primary/10 border border-gold-primary/25 hover:border-gold-primary/50"
-                >
-                  <Phone className="w-3 h-3 text-gold-primary" />
-                  <span>Ph: 97457 70675</span>
-                </a>
               </div>
 
               {/* With */}
