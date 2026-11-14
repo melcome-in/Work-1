@@ -187,7 +187,7 @@ const App = () => {
             بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ
           </p>
           <p className="font-cinzel text-base sm:text-lg text-parchment/90 tracking-widest mb-3.5 sm:mb-4">
-            SHAHEER &amp; NIDHA &bull; 13 | DECEMBER | 2026
+            SHAHEER &amp; NIDHA
           </p>
 
           <button
@@ -201,6 +201,21 @@ const App = () => {
             <MailOpen className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
             <span>Replay Wax Seal Ceremony</span>
           </button>
+
+          {/* Creator Attribution / Copyright Note */}
+          <div className="mt-8 pt-6 border-t border-gold-primary/15 text-center">
+            <p className="font-montserrat text-[11px] sm:text-xs text-parchment/65 tracking-wider">
+              Need an invitation website like this? DM{' '}
+              <a
+                href="https://www.instagram.com/melcome.in/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold-accent hover:text-gold-primary underline underline-offset-4 font-semibold transition-colors"
+              >
+                @melcome.in
+              </a>
+            </p>
+          </div>
         </footer>
       </main>
     </div>
