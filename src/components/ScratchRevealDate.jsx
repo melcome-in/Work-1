@@ -16,7 +16,7 @@ const ScratchRevealDate = () => {
   const lastCheckTimeRef = useRef(0);
   const lastCanvasWidthRef = useRef(0);
 
-  // Paint the rich 24K Gold Leaf foil on the scratch canvas
+  // Paint the Matte Champagne & Antique Royal Gold metallic foil overlay matching reference image
   const paintGoldFoil = useCallback((force = false) => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
@@ -39,132 +39,239 @@ const ScratchRevealDate = () => {
 
     ctx.globalCompositeOperation = 'source-over';
 
-    // 1. Radiant 24K Italian Gold Leaf Metallic Gradient
-    const grad = ctx.createLinearGradient(0, 0, width, height);
-    grad.addColorStop(0.00, '#C48F26'); // Rich antique gold edge
-    grad.addColorStop(0.12, '#E8BC46'); // Radiant gold body
-    grad.addColorStop(0.24, '#FFF7BA'); // Specular gold leaf highlight
-    grad.addColorStop(0.38, '#D8A42F'); // Warm yellow gold
-    grad.addColorStop(0.50, '#FFF9CF'); // Central sparkling sheen
-    grad.addColorStop(0.64, '#E2AF3C'); // Deep royal gold
-    grad.addColorStop(0.78, '#FFF1A8'); // Diagonal luster ray
-    grad.addColorStop(0.90, '#D69E2E'); // Warm amber gold
-    grad.addColorStop(1.00, '#A77117'); // Rich burnished gold edge
-    ctx.fillStyle = grad;
+    // ─── 1. MATTE CHAMPAGNE & ANTIQUE ROYAL GOLD METALLIC GRADIENT ───
+    // Soft diagonal gradient from top-left to bottom-right with diagonal champagne light band
+    const baseGrad = ctx.createLinearGradient(0, height * 0.15, width, height * 0.85);
+    baseGrad.addColorStop(0.00, '#8A6A47'); // Antique bronze-gold shadowed edge
+    baseGrad.addColorStop(0.18, '#A3835F'); // Warm satin bronze
+    baseGrad.addColorStop(0.36, '#BA9C78'); // Antique champagne gold
+    baseGrad.addColorStop(0.55, '#E2D0B6'); // Soft champagne transition
+    baseGrad.addColorStop(0.70, '#F5ECE0'); // Luminous diagonal champagne sheen (as in photo)
+    baseGrad.addColorStop(0.82, '#DFCABA'); // Soft luster reflection
+    baseGrad.addColorStop(0.92, '#BC9D78'); // Warm metallic gold
+    baseGrad.addColorStop(1.00, '#8E6E49'); // Antique royal gold edge
+    ctx.fillStyle = baseGrad;
     ctx.fillRect(0, 0, width, height);
 
-    // 2. Realistic Hand-hammered Gold Leaf Texture & Creases
+    // Soft secondary specular sheen ray across the right-center
+    const sheenGrad = ctx.createLinearGradient(width * 0.25, 0, width, height * 0.7);
+    sheenGrad.addColorStop(0.00, 'rgba(255, 255, 255, 0)');
+    sheenGrad.addColorStop(0.45, 'rgba(255, 250, 240, 0.18)');
+    sheenGrad.addColorStop(0.60, 'rgba(255, 255, 255, 0.28)');
+    sheenGrad.addColorStop(0.75, 'rgba(255, 250, 240, 0.12)');
+    sheenGrad.addColorStop(1.00, 'rgba(255, 255, 255, 0)');
+    ctx.fillStyle = sheenGrad;
+    ctx.fillRect(0, 0, width, height);
+
+    // ─── 2. FINE BRUSHED METALLIC GRAIN & SATIN TEXTURE ───
+    // Micro brushed horizontal fibers with ultra-low opacity (NO zebra/yellow stripes!)
     ctx.save();
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
-    ctx.lineWidth = 1;
-    for (let y = -height; y < height * 2; y += 4) {
+    ctx.lineWidth = 0.75;
+    for (let y = 0; y < height; y += 2) {
+      ctx.strokeStyle = (y % 4 === 0) ? 'rgba(255, 250, 240, 0.045)' : 'rgba(70, 48, 22, 0.035)';
       ctx.beginPath();
       ctx.moveTo(0, y);
-      ctx.lineTo(width, y + width * 0.4);
+      ctx.lineTo(width, y);
       ctx.stroke();
     }
-    ctx.restore();
-
-    // Subtle dark foil fracture/crease lines
-    ctx.save();
-    ctx.strokeStyle = 'rgba(110, 70, 10, 0.12)';
-    ctx.lineWidth = 0.8;
-    for (let x = 0; x < width; x += 14) {
+    // Diagonal micro-grain (45 deg) for realistic brushed sheet metal feel
+    ctx.lineWidth = 0.5;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.025)';
+    for (let x = -height; x < width + height; x += 5) {
       ctx.beginPath();
       ctx.moveTo(x, 0);
-      ctx.lineTo(x + Math.sin(x) * 16, height);
+      ctx.lineTo(x + height * 0.6, height);
       ctx.stroke();
     }
     ctx.restore();
 
-    // 3. Stamped Baroque Embossed Frame on the Gold Foil
-    ctx.save();
-    const pad = width < 420 ? 12 : 20;
+    // Subtle edge vignette / ambient shadow
+    const vignette = ctx.createRadialGradient(
+      width / 2, height / 2, Math.min(width, height) * 0.35,
+      width / 2, height / 2, Math.max(width, height) * 0.72
+    );
+    vignette.addColorStop(0, 'rgba(0, 0, 0, 0)');
+    vignette.addColorStop(1, 'rgba(40, 25, 10, 0.24)');
+    ctx.fillStyle = vignette;
+    ctx.fillRect(0, 0, width, height);
 
-    // Outer Frame Line
-    ctx.strokeStyle = 'rgba(65, 45, 10, 0.45)';
-    ctx.lineWidth = 1.4;
-    ctx.strokeRect(pad, pad, width - pad * 2, height - pad * 2);
+    // ─── 3. UNIFORM DOUBLE-LINE GOLD BORDER & CORNER FLOURISHES ───
+    const isMobile = width < 420;
+    const pad = isMobile ? 16 : 24;
+    const gap = isMobile ? 7 : 9;
+    const rOuter = isMobile ? 14 : 18;
+    const rInner = isMobile ? 9 : 12;
 
-    // Inner Delicate Line
-    ctx.strokeStyle = 'rgba(65, 45, 10, 0.45)';
-    ctx.lineWidth = 1.0;
-    ctx.strokeRect(pad + 6, pad + 6, width - (pad + 6) * 2, height - (pad + 6) * 2);
+    const drawRoundedRect = (x, y, w, h, r) => {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    };
 
-    // Corner Ornaments on Foil
-    const cornerSize = width < 420 ? 16 : 24;
-    const drawFoilCorner = (cx, cy, flipX, flipY) => {
+    // Helper for 3D debossed line drawing (highlight + shadow + main intaglio stroke)
+    const drawBeveledBorder = (x, y, w, h, r, lw) => {
+      // 1. Highlight Pass (bottom-right edge catches light)
+      ctx.strokeStyle = 'rgba(255, 250, 240, 0.45)';
+      ctx.lineWidth = lw;
+      drawRoundedRect(x + 0.8, y + 0.9, w, h, r);
+      ctx.stroke();
+
+      // 2. Debossed Shadow Pass (top-left edge casts shadow)
+      ctx.strokeStyle = 'rgba(45, 28, 12, 0.55)';
+      ctx.lineWidth = lw + 0.2;
+      drawRoundedRect(x - 0.6, y - 0.6, w, h, r);
+      ctx.stroke();
+
+      // 3. Main Dark Bronze Intaglio Stroke
+      ctx.strokeStyle = '#3E2A14';
+      ctx.lineWidth = lw;
+      drawRoundedRect(x, y, w, h, r);
+      ctx.stroke();
+    };
+
+    // Draw Outer & Inner Uniform Frame Lines
+    drawBeveledBorder(pad, pad, width - pad * 2, height - pad * 2, rOuter, 1.4);
+    drawBeveledBorder(pad + gap, pad + gap, width - (pad + gap) * 2, height - (pad + gap) * 2, rInner, 1.1);
+
+    // Classical Ornamental Corner Flourishes (Matching Reference Photo)
+    const flourishSize = isMobile ? 32 : 44;
+    const drawOrnamentalCorner = (cx, cy, scaleX, scaleY) => {
       ctx.save();
       ctx.translate(cx, cy);
-      ctx.scale(flipX, flipY);
-      ctx.strokeStyle = 'rgba(65, 45, 10, 0.45)';
-      ctx.lineWidth = 1.4;
-      ctx.beginPath();
-      ctx.arc(0, 0, cornerSize, 0, Math.PI / 2);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.arc(4, 4, cornerSize - 6, 0, Math.PI / 2);
-      ctx.stroke();
+      ctx.scale(scaleX, scaleY);
+
+      const renderPass = (color, lw, ox = 0, oy = 0) => {
+        ctx.save();
+        ctx.translate(ox, oy);
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = lw;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        const s = flourishSize;
+
+        // Outer corner arching volute
+        ctx.beginPath();
+        ctx.moveTo(s * 0.92, s * 0.02);
+        ctx.bezierCurveTo(s * 0.58, s * 0.04, s * 0.28, s * 0.12, s * 0.12, s * 0.28);
+        ctx.bezierCurveTo(s * 0.04, s * 0.58, s * 0.02, s * 0.92, s * 0.02, s * 0.92);
+        ctx.stroke();
+
+        // Upper spiral volute curling inward
+        ctx.beginPath();
+        ctx.moveTo(s * 0.92, s * 0.02);
+        ctx.bezierCurveTo(s * 0.78, -s * 0.05, s * 0.60, 0, s * 0.54, s * 0.14);
+        ctx.bezierCurveTo(s * 0.48, s * 0.26, s * 0.62, s * 0.34, s * 0.70, s * 0.26);
+        ctx.bezierCurveTo(s * 0.76, s * 0.20, s * 0.72, s * 0.12, s * 0.64, s * 0.14);
+        ctx.stroke();
+
+        // Left spiral volute curling inward (symmetric)
+        ctx.beginPath();
+        ctx.moveTo(s * 0.02, s * 0.92);
+        ctx.bezierCurveTo(-s * 0.05, s * 0.78, 0, s * 0.60, s * 0.14, s * 0.54);
+        ctx.bezierCurveTo(s * 0.26, s * 0.48, s * 0.34, s * 0.62, s * 0.26, s * 0.70);
+        ctx.bezierCurveTo(s * 0.20, s * 0.76, s * 0.12, s * 0.72, s * 0.14, s * 0.64);
+        ctx.stroke();
+
+        // Inner decorative acanthus leaf loop
+        ctx.beginPath();
+        ctx.moveTo(s * 0.44, s * 0.22);
+        ctx.bezierCurveTo(s * 0.34, s * 0.14, s * 0.22, s * 0.14, s * 0.14, s * 0.22);
+        ctx.bezierCurveTo(s * 0.14, s * 0.34, s * 0.22, s * 0.44, s * 0.32, s * 0.44);
+        ctx.stroke();
+
+        // Diagonal leafy tendril pointing to card center
+        ctx.beginPath();
+        ctx.moveTo(s * 0.30, s * 0.30);
+        ctx.bezierCurveTo(s * 0.42, s * 0.42, s * 0.54, s * 0.54, s * 0.68, s * 0.68);
+        ctx.stroke();
+
+        // Delicate ornamental finial dots
+        ctx.beginPath();
+        ctx.arc(s * 0.66, s * 0.18, lw * 0.9, 0, Math.PI * 2);
+        ctx.arc(s * 0.18, s * 0.66, lw * 0.9, 0, Math.PI * 2);
+        ctx.arc(s * 0.68, s * 0.68, lw * 1.1, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      };
+
+      // Pass 1: Highlight
+      renderPass('rgba(255, 250, 240, 0.45)', 1.1, 0.7, 0.8);
+      // Pass 2: Shadow
+      renderPass('rgba(45, 28, 12, 0.55)', 1.3, -0.6, -0.6);
+      // Pass 3: Main Stroke
+      renderPass('#3E2A14', 1.2, 0, 0);
+
       ctx.restore();
     };
-    drawFoilCorner(pad + 6, pad + 6, 1, 1);
-    drawFoilCorner(width - pad - 6, pad + 6, -1, 1);
-    drawFoilCorner(pad + 6, height - pad - 6, 1, -1);
-    drawFoilCorner(width - pad - 6, height - pad - 6, -1, -1);
-    ctx.restore();
 
-    // 4. Stamped Embossed Foil Typography
-    ctx.save();
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
+    // Draw in all 4 corners
+    const cPad = pad + gap;
+    drawOrnamentalCorner(cPad, cPad, 1, 1);
+    drawOrnamentalCorner(width - cPad, cPad, -1, 1);
+    drawOrnamentalCorner(cPad, height - cPad, 1, -1);
+    drawOrnamentalCorner(width - cPad, height - cPad, -1, -1);
 
+    // ─── 4. TYPOGRAPHY (LETTERPRESS / DEBOSSED 3D DEPTH) ───
     const centerY = height / 2;
-    const isMobile = width < 420;
 
-    // Top Cursive Calligraphy
-    ctx.font = isMobile
-      ? '32px "Great Vibes", "Alex Brush", cursive'
-      : '44px "Great Vibes", "Alex Brush", cursive';
-    ctx.fillStyle = '#2A1E08';
-    ctx.fillText('Swipe to Scratch', width / 2, centerY - (isMobile ? 22 : 30));
+    const drawDebossedText = (text, x, y, font, letterSpacing = '0px', mainColor = '#36230E') => {
+      ctx.save();
+      ctx.font = font;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      try {
+        ctx.letterSpacing = letterSpacing;
+      } catch (e) {}
 
-    // Center Title - Spaced to prevent tail of 'L' colliding with 'D'
-    ctx.font = isMobile
-      ? '700 15px "Cinzel Decorative", serif'
-      : '700 20px "Cinzel Decorative", serif';
-    ctx.fillStyle = '#2A1E08';
-    const part1 = 'REVEAL';
-    const part2 = 'DATE & VENUE';
-    const gap = isMobile ? 18 : 24;
-    const w1 = ctx.measureText(part1).width;
-    const w2 = ctx.measureText(part2).width;
-    const totalW = w1 + gap + w2;
-    const startX = (width - totalW) / 2;
-    ctx.textAlign = 'left';
-    ctx.fillText(part1, startX, centerY + (isMobile ? 13 : 16));
-    ctx.fillText(part2, startX + w1 + gap, centerY + (isMobile ? 13 : 16));
+      // 1. Specular metallic bevel highlight (bottom-right edge catches light)
+      ctx.fillStyle = 'rgba(255, 250, 240, 0.6)';
+      ctx.fillText(text, x + 0.8, y + 1.0);
 
-    // Bottom Badge
-    ctx.textAlign = 'center';
-    ctx.font = isMobile
-      ? '600 10px "Montserrat", sans-serif'
-      : '600 11px "Montserrat", sans-serif';
-    try {
-      ctx.letterSpacing = '0.22em';
-    } catch (e) {
-      // fallback if letterSpacing not supported on older canvas
-    }
-    ctx.fillStyle = '#2A1E08';
-    ctx.fillText('✦ SHAHEER & NIDHA ✦', width / 2, centerY + (isMobile ? 40 : 48));
-    try {
-      ctx.letterSpacing = '0px';
-    } catch (e) {}
+      // 2. Intaglio debossed shadow (top-left edge casts stamped shadow into foil)
+      ctx.fillStyle = 'rgba(30, 18, 6, 0.55)';
+      ctx.fillText(text, x - 0.7, y - 0.7);
 
-    ctx.restore();
+      // 3. Main dark bronze-gold stamped face
+      ctx.fillStyle = mainColor;
+      ctx.fillText(text, x, y);
+
+      ctx.restore();
+    };
+
+    // Line 1: "Swipe to Scratch" in elegant flowing script
+    const scriptFontSize = isMobile ? 32 : 44;
+    const scriptFont = `italic 400 ${scriptFontSize}px "Alex Brush", "Great Vibes", "Cormorant Garamond", cursive`;
+    drawDebossedText('Swipe to Scratch', width / 2, centerY - (isMobile ? 26 : 34), scriptFont, '0.02em', '#3D2812');
+
+    // Line 2: "REVEAL DATE & VENUE" in classic regal serif with balanced spacing
+    const serifFontSize = isMobile ? 15 : 21;
+    const serifFont = `700 ${serifFontSize}px "Cinzel", "Cinzel Decorative", serif`;
+    drawDebossedText('REVEAL DATE & VENUE', width / 2, centerY + (isMobile ? 10 : 14), serifFont, isMobile ? '0.14em' : '0.18em', '#34210C');
+
+    // Line 3: "✦ SHAHEER & NIDHA ✦" in clean, understated sans-serif
+    const sansFontSize = isMobile ? 10 : 12;
+    const sansFont = `600 ${sansFontSize}px "Montserrat", -apple-system, sans-serif`;
+    drawDebossedText('✦ SHAHEER & NIDHA ✦', width / 2, centerY + (isMobile ? 42 : 52), sansFont, '0.24em', '#46311A');
   }, []);
 
   useEffect(() => {
     paintGoldFoil(true);
+    if (typeof document !== 'undefined' && document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        paintGoldFoil(true);
+      });
+    }
     const handleResize = () => paintGoldFoil(false);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
