@@ -250,32 +250,79 @@ const GoldenBotanicalBloom = ({ x, y, scale = 1, rotate = 0, mirror = false }) =
         />
       </g>
 
-      {/* Radiant Golden Flower Heart Bloom (Expands & Radiates) */}
-      <g className="golden-floral-bloom" opacity="0">
+      {/* Golden Inner Petals & Center Stamen Line Drawings (Pure Gold Linework, No White/Red/Yellow Fills) */}
+      <g stroke="url(#antiqueGoldGrad)" fill="none">
+        {/* Inner Petal Line Outlines */}
         <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
           d="M 8,-6 C 22,-10 32,-4 32,8 C 28,18 16,16 8,6 Z"
-          fill="url(#antiqueGoldGrad)"
-          opacity="0.85"
+          strokeWidth="1.5"
+          opacity="0"
         />
         <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
           d="M 6,8 C 14,22 8,30 -4,32 C -16,30 -16,18 -6,8 Z"
-          fill="url(#antiqueGoldGrad)"
-          opacity="0.85"
+          strokeWidth="1.5"
+          opacity="0"
         />
         <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
           d="M -8,6 C -22,10 -32,4 -32,-8 C -28,-18 -16,-16 -8,-6 Z"
-          fill="url(#antiqueGoldGrad)"
-          opacity="0.85"
+          strokeWidth="1.5"
+          opacity="0"
         />
         <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
           d="M -6,-8 C -14,-22 -8,-30 4,-32 C 16,-30 16,-18 6,-8 Z"
-          fill="url(#antiqueGoldGrad)"
-          opacity="0.85"
+          strokeWidth="1.5"
+          opacity="0"
         />
-        {/* Core Radiance */}
-        <circle cx="0" cy="0" r="14" fill="#FFF5D6" opacity="0.9" />
-        <circle cx="0" cy="0" r="7" fill="#6B4E1B" />
-        <circle cx="0" cy="0" r="3" fill="#FFE59E" />
+        {/* Center Stamen Concentric Gold Line Rings */}
+        <circle
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          cx="0"
+          cy="0"
+          r="9"
+          strokeWidth="1.4"
+          opacity="0"
+        />
+        <circle
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          cx="0"
+          cy="0"
+          r="4.5"
+          strokeWidth="1.2"
+          opacity="0"
+        />
+        {/* Center Stamen Radiating Gold Ray Lines */}
+        <path
+          className="golden-floral-line"
+          pathLength="100"
+          strokeDasharray="100"
+          strokeDashoffset="100"
+          d="M 0,-4.5 L 0,-9 M 0,4.5 L 0,9 M -4.5,0 L -9,0 M 4.5,0 L 9,0 M -3,-3 L -6.5,-6.5 M 3,3 L 6.5,6.5 M -3,3 L -6.5,6.5 M 3,-3 L 6.5,-6.5"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+          opacity="0"
+        />
       </g>
     </g>
   );
@@ -319,23 +366,11 @@ const RoyalEnvelope = ({ onOpenComplete, onTriggerAudio }) => {
         {
           strokeDashoffset: 0,
           opacity: 1,
-          duration: 1.15,
-          stagger: 0.035,
+          duration: 1.25,
+          stagger: 0.025,
           ease: 'power2.inOut',
         },
         '-=0.08'
-      )
-      // Golden flower centers bloom with radiance
-      .to(
-        '.golden-floral-bloom',
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.75,
-          stagger: 0.04,
-          ease: 'back.out(1.5)',
-        },
-        '-=0.75'
       )
       // Step 3: Celebratory gold particle burst as seal lifts away
       .to(
