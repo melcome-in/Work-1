@@ -1,6 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
-import confetti from 'canvas-confetti';
-import { Sparkles, Heart } from 'lucide-react';
+import React, { useRef, useEffect } from 'react';
 
 import coupleImage from '../assets/images/couple-dance.png';
 
@@ -9,8 +7,6 @@ const InteractiveFirstDance = () => {
   const archRef = useRef(null);
   const imageRef = useRef(null);
   const particlesCanvasRef = useRef(null);
-
-  const [celebrateCount, setCelebrateCount] = useState(0);
 
   // Sparkle particle system inside the arch
   useEffect(() => {
@@ -72,29 +68,6 @@ const InteractiveFirstDance = () => {
     };
   }, []);
 
-  // Trigger celebration confetti and gold glow
-  const handleCelebrate = () => {
-    setCelebrateCount((prev) => prev + 1);
-
-    if (archRef.current) {
-      const rect = archRef.current.getBoundingClientRect();
-      const originX = (rect.left + rect.width / 2) / window.innerWidth;
-      const originY = (rect.top + rect.height * 0.5) / window.innerHeight;
-
-      confetti({
-        particleCount: 30,
-        spread: 80,
-        origin: { x: originX, y: originY },
-        colors: ['#D4AF37', '#FCF6BA', '#F3D98B', '#FFFFFF', '#E8C868'],
-        shapes: ['circle'],
-        scalar: 0.7,
-        ticks: 110,
-        gravity: 0.65,
-        disableForReducedMotion: true,
-      });
-    }
-  };
-
   return (
     <section
       ref={containerRef}
@@ -117,8 +90,7 @@ const InteractiveFirstDance = () => {
       <div className="relative max-w-md sm:max-w-lg mx-auto">
         <div
           ref={archRef}
-          onClick={handleCelebrate}
-          className="relative w-full h-[480px] sm:h-[560px] rounded-t-[140px] sm:rounded-t-[200px] rounded-b-2xl sm:rounded-b-3xl bg-gradient-to-b from-[#061812] via-[#09241B] to-[#040C08] border border-gold-primary/60 sm:border-2 shadow-gold-glow flex flex-col items-center justify-end overflow-hidden cursor-pointer group"
+          className="relative w-full h-[480px] sm:h-[560px] rounded-t-[140px] sm:rounded-t-[200px] rounded-b-2xl sm:rounded-b-3xl bg-gradient-to-b from-[#061812] via-[#09241B] to-[#040C08] border border-gold-primary/60 sm:border-2 shadow-gold-glow flex flex-col items-center justify-end overflow-hidden group"
         >
           {/* Inner Moorish Arch Filigree Line */}
           <div className="pointer-events-none absolute inset-2 sm:inset-3 rounded-t-[132px] sm:rounded-t-[188px] rounded-b-xl sm:rounded-b-2xl border border-gold-primary/25" />
@@ -169,30 +141,6 @@ const InteractiveFirstDance = () => {
               />
             </div>
           </div>
-        </div>
-
-        {/* Interactive Control Pill Button & Counter */}
-        <div className="mt-6 flex flex-col items-center gap-3">
-          <button
-            type="button"
-            onClick={handleCelebrate}
-            className="group relative inline-flex items-center justify-center gap-2.5 px-8 sm:px-10 py-3 sm:py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] via-[#FDF7C3] to-[#AA771C] text-[#0B0F0D] font-cinzel font-bold text-xs sm:text-sm tracking-[0.2em] uppercase shadow-[0_4px_20px_rgba(212,175,55,0.35)] hover:shadow-[0_6px_30px_rgba(212,175,55,0.55)] active:scale-95 transition-all duration-300 overflow-hidden"
-          >
-            {/* Shimmer sweep effect */}
-            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
-            <Sparkles className="w-4 h-4 text-[#0B0F0D] transition-transform group-hover:rotate-45" />
-            <span>✦ Celebrate the Moment ✦</span>
-          </button>
-
-          {/* Romantic Counter Badge */}
-          {celebrateCount > 0 && (
-            <div className="inline-flex items-center gap-1.5 font-cormorant italic text-sm sm:text-base text-gold-accent animate-fade-in">
-              <Heart className="w-3.5 h-3.5 fill-gold-accent text-gold-accent inline" />
-              <span>
-                Celebrated {celebrateCount} {celebrateCount === 1 ? 'time' : 'times'} with eternal blessings
-              </span>
-            </div>
-          )}
         </div>
       </div>
     </section>
