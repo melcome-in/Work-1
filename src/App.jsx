@@ -6,6 +6,7 @@ import RoyalEnvelope from './components/RoyalEnvelope.jsx';
 import AudioPlayer from './components/AudioPlayer.jsx';
 import ScratchRevealDate from './components/ScratchRevealDate.jsx';
 import CountdownTimer from './components/CountdownTimer.jsx';
+import InteractiveFirstDance from './components/InteractiveFirstDance.jsx';
 import weddingSong from './assets/audio/wedding-song.mp3';
 
 const App = () => {
@@ -179,6 +180,9 @@ const App = () => {
 
         {/* Component: Palace Archway Countdown Timer */}
         <CountdownTimer />
+
+        {/* Component: Interactive First Dance "Two Souls, One Rhythm" */}
+        <InteractiveFirstDance />
 
         {/* Ceremonial Footer */}
         <footer className="py-10 sm:py-14 px-3 sm:px-4 border-t border-gold-primary/25 text-center">
