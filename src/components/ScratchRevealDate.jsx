@@ -547,9 +547,6 @@ const ScratchRevealDate = () => {
             <p className="font-montserrat text-[11px] sm:text-xs text-[#E5C368] mt-0.5 font-semibold">
               Time: 12:00am to 2:30pm
             </p>
-            <p className="font-montserrat text-[9px] sm:text-[10px] text-[#C9D6CA]/75 italic mt-0.5">
-              (Printed as 12:00am in the card)
-            </p>
           </div>
 
           {/* Open in Google Maps Button */}
