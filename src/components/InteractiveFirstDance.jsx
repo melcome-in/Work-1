@@ -2,15 +2,15 @@ import React, { useRef, useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { Sparkles, Heart } from 'lucide-react';
 
-import coupleDanceGif from '../assets/images/couple-dance.gif';
+import coupleImage from '../assets/images/couple-dance.png';
 
 const InteractiveFirstDance = () => {
   const containerRef = useRef(null);
   const archRef = useRef(null);
-  const gifRef = useRef(null);
+  const imageRef = useRef(null);
   const particlesCanvasRef = useRef(null);
 
-  const [twirlCount, setTwirlCount] = useState(0);
+  const [celebrateCount, setCelebrateCount] = useState(0);
 
   // Sparkle particle system inside the arch
   useEffect(() => {
@@ -30,7 +30,7 @@ const InteractiveFirstDance = () => {
     window.addEventListener('resize', handleResize);
 
     // Ambient rising golden specks
-    const particles = Array.from({ length: 30 }, () => ({
+    const particles = Array.from({ length: 32 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       size: Math.random() * 2.2 + 0.8,
@@ -72,9 +72,9 @@ const InteractiveFirstDance = () => {
     };
   }, []);
 
-  // Trigger celebration confetti
+  // Trigger celebration confetti and gold glow
   const handleCelebrate = () => {
-    setTwirlCount((prev) => prev + 1);
+    setCelebrateCount((prev) => prev + 1);
 
     if (archRef.current) {
       const rect = archRef.current.getBoundingClientRect();
@@ -82,8 +82,8 @@ const InteractiveFirstDance = () => {
       const originY = (rect.top + rect.height * 0.5) / window.innerHeight;
 
       confetti({
-        particleCount: 28,
-        spread: 75,
+        particleCount: 30,
+        spread: 80,
         origin: { x: originX, y: originY },
         colors: ['#D4AF37', '#FCF6BA', '#F3D98B', '#FFFFFF', '#E8C868'],
         shapes: ['circle'],
@@ -118,7 +118,7 @@ const InteractiveFirstDance = () => {
         <div
           ref={archRef}
           onClick={handleCelebrate}
-          className="relative w-full h-[470px] sm:h-[550px] rounded-t-[140px] sm:rounded-t-[200px] rounded-b-2xl sm:rounded-b-3xl bg-gradient-to-b from-[#061812] via-[#09241B] to-[#040C08] border border-gold-primary/60 sm:border-2 shadow-gold-glow flex flex-col items-center justify-end overflow-hidden cursor-pointer group"
+          className="relative w-full h-[480px] sm:h-[560px] rounded-t-[140px] sm:rounded-t-[200px] rounded-b-2xl sm:rounded-b-3xl bg-gradient-to-b from-[#061812] via-[#09241B] to-[#040C08] border border-gold-primary/60 sm:border-2 shadow-gold-glow flex flex-col items-center justify-end overflow-hidden cursor-pointer group"
         >
           {/* Inner Moorish Arch Filigree Line */}
           <div className="pointer-events-none absolute inset-2 sm:inset-3 rounded-t-[132px] sm:rounded-t-[188px] rounded-b-xl sm:rounded-b-2xl border border-gold-primary/25" />
@@ -146,25 +146,25 @@ const InteractiveFirstDance = () => {
 
           {/* Floor Golden Spotlight Glow */}
           <div
-            className="absolute bottom-0 w-full h-44 pointer-events-none z-0"
+            className="absolute bottom-0 w-full h-48 pointer-events-none z-0"
             style={{
               background:
-                'radial-gradient(ellipse 70% 40% at 50% 90%, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.1) 50%, transparent 75%)',
+                'radial-gradient(ellipse 70% 45% at 50% 90%, rgba(212, 175, 55, 0.38) 0%, rgba(212, 175, 55, 0.12) 50%, transparent 75%)',
             }}
           />
 
-          {/* Animated Couple GIF Container */}
+          {/* Pristine Couple Image Container */}
           <div className="relative z-10 w-full h-full flex items-end justify-center pb-3 sm:pb-5">
-            <div className="relative w-full max-w-[340px] sm:max-w-[400px] aspect-[597/800] drop-shadow-[0_16px_32px_rgba(0,0,0,0.7)] flex items-center justify-center">
+            <div className="relative w-full max-w-[340px] sm:max-w-[400px] aspect-[597/800] drop-shadow-[0_18px_35px_rgba(0,0,0,0.75)] flex items-center justify-center">
               {/* Floor Shadow beneath couple */}
-              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[85%] h-6 rounded-[100%] bg-black/50 blur-[5px] pointer-events-none" />
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[85%] h-6 rounded-[100%] bg-black/60 blur-[6px] pointer-events-none" />
 
-              {/* The Couple GIF */}
+              {/* High-Resolution Couple Image */}
               <img
-                ref={gifRef}
-                src={coupleDanceGif}
-                alt="Groom and Bride First Dance"
-                className="w-full h-full object-contain pointer-events-none transition-transform duration-300 group-hover:scale-[1.02]"
+                ref={imageRef}
+                src={coupleImage}
+                alt="Mohammed Shaheer and Fathima Nidha"
+                className="w-full h-full object-contain pointer-events-none transition-transform duration-500 ease-out group-hover:scale-[1.025]"
                 draggable={false}
               />
             </div>
@@ -185,11 +185,11 @@ const InteractiveFirstDance = () => {
           </button>
 
           {/* Romantic Counter Badge */}
-          {twirlCount > 0 && (
+          {celebrateCount > 0 && (
             <div className="inline-flex items-center gap-1.5 font-cormorant italic text-sm sm:text-base text-gold-accent animate-fade-in">
               <Heart className="w-3.5 h-3.5 fill-gold-accent text-gold-accent inline" />
               <span>
-                Celebrated {twirlCount} {twirlCount === 1 ? 'time' : 'times'} with eternal blessings
+                Celebrated {celebrateCount} {celebrateCount === 1 ? 'time' : 'times'} with eternal blessings
               </span>
             </div>
           )}
