@@ -127,7 +127,7 @@ const InteractiveFirstDance = () => {
 
           {/* Pristine Couple Image Container */}
           <div className="relative z-10 w-full h-full flex items-end justify-center pb-3 sm:pb-5">
-            <div className="relative w-full max-w-[340px] sm:max-w-[400px] aspect-[597/800] drop-shadow-[0_18px_35px_rgba(0,0,0,0.75)] flex items-center justify-center">
+            <div className="relative w-full max-w-[340px] sm:max-w-[400px] aspect-[600/865] drop-shadow-[0_18px_35px_rgba(0,0,0,0.75)] flex items-center justify-center">
               {/* Floor Shadow beneath couple */}
               <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[85%] h-6 rounded-[100%] bg-black/60 blur-[6px] pointer-events-none" />
 
